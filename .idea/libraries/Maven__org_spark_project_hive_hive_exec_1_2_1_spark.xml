@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: org.spark-project.hive:hive-exec:1.2.1.spark">
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/org/spark-project/hive/hive-exec/1.2.1.spark/hive-exec-1.2.1.spark.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$MAVEN_REPOSITORY$/org/spark-project/hive/hive-exec/1.2.1.spark/hive-exec-1.2.1.spark-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$MAVEN_REPOSITORY$/org/spark-project/hive/hive-exec/1.2.1.spark/hive-exec-1.2.1.spark-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
