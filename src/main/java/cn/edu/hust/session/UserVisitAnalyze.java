@@ -89,9 +89,12 @@ public class UserVisitAnalyze {
          *         一场灾难。
          */
 
+        //计算各个session占比,并写入MySQL
+        calculateAndPersist(sessionAggrStatAccumulator.value(),taskId);
         //关闭spark上下文
         context.close();
     }
+
 
 
 
@@ -348,5 +351,9 @@ public class UserVisitAnalyze {
             }
         });
         return filteredSessionRDD;
+    }
+
+
+    private static void calculateAndPersist(String value,Long taskId) {
     }
 }
