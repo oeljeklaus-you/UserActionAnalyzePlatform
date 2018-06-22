@@ -64,10 +64,12 @@ public class StringUtils {
 			String delimiter, String field) {
 		String[] fields = str.split(delimiter);
 		for(String concatField : fields) {
-			String fieldName = concatField.split("=")[0];
-			String fieldValue = concatField.split("=")[1];
-			if(fieldName.equals(field)) {
-				return fieldValue;
+			if(concatField.split("=").length==2) {
+				String fieldName = concatField.split("=")[0];
+				String fieldValue = concatField.split("=")[1];
+				if (fieldName.equals(field)) {
+					return fieldValue;
+				}
 			}
 		}
 		return null;

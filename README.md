@@ -327,3 +327,6 @@ task_param：最最重要，用来使用JSON的格式，来封装用户提交的
 完成了数据调研、需求分析、技术方案设计、数据设计以后，正式进入编码实现和功能测试阶段。最后才是性能调优阶段。 
 
 
+## 用户访问Session的比较高端技术
+### 自定义Accumulator
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;使用自定义Accumulator降低维护成本，一个就可以搞定很多业务需求

@@ -35,4 +35,41 @@ public class ConfigurationManager {
     {
         return prop.getProperty(key);
     }
+
+    /**
+     * 获取整数变量
+     * @param key
+     * @return
+     */
+    public static Integer getInteger(String key)
+    {
+        String value=getProperty(key);
+        try
+        {
+            Integer result=Integer.valueOf(value);
+            return result;
+        }
+        catch (Exception e)
+        {
+
+            e.printStackTrace();
+        }
+        return 0;
+    }
+
+    /**
+     * 获取布尔型
+     * @param key
+     * @return
+     */
+    public static Boolean getBoolean(String key)
+    {
+        String value=getProperty(key);
+        if("false".equals(value))
+        {
+            return false;
+        }
+        return  true;
+    }
+
 }
