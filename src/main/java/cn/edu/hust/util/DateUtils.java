@@ -16,6 +16,12 @@ public class DateUtils {
 			new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 	public static final SimpleDateFormat DATE_FORMAT = 
 			new SimpleDateFormat("yyyy-MM-dd");
+	public static ThreadLocal<SimpleDateFormat> simpleDateFormatThreadLocal=new ThreadLocal<SimpleDateFormat>(){
+		@Override
+		protected SimpleDateFormat initialValue() {
+			return new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		}
+	};
 	
 	/**
 	 * 判断一个时间是否在另一个时间之前
@@ -132,7 +138,9 @@ public class DateUtils {
 	public static Date parseTime(String time)
 	{
 		try {
-			return TIME_FORMAT.parse(time);
+			Date result=simpleDateFormatThreadLocal.get().parse(time);
+			simpleDateFormatThreadLocal.remove();
+			return result;
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}

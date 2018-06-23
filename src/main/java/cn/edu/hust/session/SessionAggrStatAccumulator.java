@@ -44,7 +44,7 @@ public class SessionAggrStatAccumulator implements AccumulatorParam<String>{
         if(value!=null)
         {
             int newValue=Integer.valueOf(value)+1;
-            StringUtils.setFieldInConcatString(v1,"\\|",v2,String.valueOf(newValue));
+           return StringUtils.setFieldInConcatString(v1,"\\|",v2,String.valueOf(newValue));
         }
         return v1;
     }
