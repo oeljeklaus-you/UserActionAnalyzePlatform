@@ -2,12 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a7505764-040b-48e2-b2fc-8c5b579e595f" name="Default" comment="">
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/cn/edu/hust/dao/SessionDetailDao.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/cn/edu/hust/dao/impl/SessionDetailDaoImpl.java" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/src/test/java/cn/edu/hust/dao/SessionDetailTest.java" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/src/test/java/cn/edu/hust/dao/SessionRandomExtractDaoTest.java" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/edu/hust/dao/factory/DaoFactory.java" afterPath="$PROJECT_DIR$/src/main/java/cn/edu/hust/dao/factory/DaoFactory.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/edu/hust/domain/SessionDetail.java" afterPath="$PROJECT_DIR$/src/main/java/cn/edu/hust/domain/SessionDetail.java" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cn/edu/hust/dao/SessionAggrStatDao.java" afterPath="$PROJECT_DIR$/src/main/java/cn/edu/hust/dao/SessionAggrStatDao.java" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cn/edu/hust/dao/SessionDetailDao.java" afterPath="$PROJECT_DIR$/src/main/java/cn/edu/hust/dao/SessionDetailDao.java" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cn/edu/hust/dao/impl/SessionDetailDaoImpl.java" afterPath="$PROJECT_DIR$/src/main/java/cn/edu/hust/dao/impl/SessionDetailDaoImpl.java" />
       <change beforePath="$PROJECT_DIR$/src/main/java/cn/edu/hust/session/UserVisitAnalyze.java" afterPath="$PROJECT_DIR$/src/main/java/cn/edu/hust/session/UserVisitAnalyze.java" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/conf.properties" afterPath="$PROJECT_DIR$/src/main/resources/conf.properties" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -20,108 +22,55 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="UserVisitAnalyze.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="UserVisitAnalyze.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/cn/edu/hust/session/UserVisitAnalyze.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="430">
-              <caret line="538" column="58" lean-forward="false" selection-start-line="538" selection-start-column="58" selection-end-line="538" selection-end-column="58" />
+            <state relative-caret-position="1284">
+              <caret line="100" column="10" lean-forward="false" selection-start-line="100" selection-start-column="10" selection-end-line="100" selection-end-column="10" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#4969#5195#0" expanded="true" />
-                <element signature="e#5194#5195#0" expanded="true" />
-                <element signature="e#5544#5769#0" expanded="true" />
-                <element signature="e#5768#5769#0" expanded="true" />
-                <element signature="e#5999#8795#0" expanded="true" />
-                <element signature="e#8794#8795#0" expanded="true" />
-                <element signature="e#9015#9238#0" expanded="true" />
-                <element signature="e#9237#9238#0" expanded="true" />
-                <element signature="e#9491#10505#0" expanded="true" />
-                <element signature="e#10504#10505#0" expanded="true" />
-                <element signature="e#16802#17326#0" expanded="true" />
-                <element signature="e#17325#17326#0" expanded="true" />
-                <element signature="e#17567#17594#0" expanded="true" />
-                <element signature="e#18376#18409#0" expanded="true" />
-                <element signature="e#20587#22697#0" expanded="true" />
-                <element signature="e#21053#21077#0" expanded="true" />
-                <element signature="e#21282#21304#0" expanded="true" />
-                <element signature="e#22696#22697#0" expanded="true" />
-                <element signature="e#22961#24328#0" expanded="true" />
-                <element signature="e#24327#24328#0" expanded="true" />
+                <element signature="e#4973#5199#0" expanded="true" />
+                <element signature="e#5198#5199#0" expanded="true" />
+                <element signature="e#5548#5773#0" expanded="true" />
+                <element signature="e#5772#5773#0" expanded="true" />
+                <element signature="e#6003#8821#0" expanded="true" />
+                <element signature="e#8820#8821#0" expanded="true" />
+                <element signature="e#9041#9264#0" expanded="true" />
+                <element signature="e#9263#9264#0" expanded="true" />
+                <element signature="e#9517#10531#0" expanded="true" />
+                <element signature="e#10530#10531#0" expanded="true" />
+                <element signature="e#16828#17352#0" expanded="true" />
+                <element signature="e#17351#17352#0" expanded="true" />
+                <element signature="e#17593#17620#0" expanded="true" />
+                <element signature="e#18402#18435#0" expanded="true" />
+                <element signature="e#20610#22709#0" expanded="true" />
+                <element signature="e#21076#21100#0" expanded="true" />
+                <element signature="e#21305#21327#0" expanded="true" />
+                <element signature="e#22708#22709#0" expanded="true" />
+                <element signature="e#22891#24423#0" expanded="true" />
+                <element signature="e#23158#23173#0" expanded="true" />
+                <element signature="e#24422#24423#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="DaoFactory.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/cn/edu/hust/dao/factory/DaoFactory.java">
+      <file leaf-file-name="JDBCHelper.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/cn/edu/hust/jdbc/JDBCHelper.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="361">
-              <caret line="34" column="42" lean-forward="false" selection-start-line="34" selection-start-column="42" selection-end-line="34" selection-end-column="42" />
-              <folding>
-                <element signature="e#834#835#0" expanded="true" />
-                <element signature="e#890#891#0" expanded="true" />
-                <element signature="e#955#956#0" expanded="true" />
-                <element signature="e#1004#1005#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="473">
+              <caret line="44" column="0" lean-forward="true" selection-start-line="44" selection-start-column="0" selection-end-line="44" selection-end-column="0" />
+              <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="SessionDetail.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/cn/edu/hust/domain/SessionDetail.java">
+      <file leaf-file-name="conf.properties" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/resources/conf.properties">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="361">
-              <caret line="19" column="5" lean-forward="true" selection-start-line="19" selection-start-column="5" selection-end-line="19" selection-end-column="5" />
-              <folding>
-                <element signature="e#1305#1306#0" expanded="true" />
-                <element signature="e#1334#1335#0" expanded="true" />
-                <element signature="e#1376#1377#0" expanded="true" />
-                <element signature="e#1412#1413#0" expanded="true" />
-                <element signature="e#1443#1444#0" expanded="true" />
-                <element signature="e#1472#1473#0" expanded="true" />
-                <element signature="e#1514#1515#0" expanded="true" />
-                <element signature="e#1550#1551#0" expanded="true" />
-                <element signature="e#1585#1586#0" expanded="true" />
-                <element signature="e#1616#1617#0" expanded="true" />
-                <element signature="e#1664#1665#0" expanded="true" />
-                <element signature="e#1704#1705#0" expanded="true" />
-                <element signature="e#1735#1736#0" expanded="true" />
-                <element signature="e#1764#1765#0" expanded="true" />
-                <element signature="e#1806#1807#0" expanded="true" />
-                <element signature="e#1842#1843#0" expanded="true" />
-                <element signature="e#1879#1880#0" expanded="true" />
-                <element signature="e#1912#1913#0" expanded="true" />
-                <element signature="e#1964#1965#0" expanded="true" />
-                <element signature="e#2008#2009#0" expanded="true" />
-                <element signature="e#2048#2049#0" expanded="true" />
-                <element signature="e#2084#2085#0" expanded="true" />
-                <element signature="e#2142#2143#0" expanded="true" />
-                <element signature="e#2192#2193#0" expanded="true" />
-                <element signature="e#2232#2233#0" expanded="true" />
-                <element signature="e#2270#2271#0" expanded="true" />
-                <element signature="e#2330#2331#0" expanded="true" />
-                <element signature="e#2384#2385#0" expanded="true" />
-                <element signature="e#2423#2424#0" expanded="true" />
-                <element signature="e#2460#2461#0" expanded="true" />
-                <element signature="e#2518#2519#0" expanded="true" />
-                <element signature="e#2570#2571#0" expanded="true" />
-                <element signature="e#2613#2614#0" expanded="true" />
-                <element signature="e#2652#2653#0" expanded="true" />
-                <element signature="e#2716#2717#0" expanded="true" />
-                <element signature="e#2772#2773#0" expanded="true" />
-                <element signature="e#2814#2815#0" expanded="true" />
-                <element signature="e#2852#2853#0" expanded="true" />
-                <element signature="e#2914#2915#0" expanded="true" />
-                <element signature="e#2968#2969#0" expanded="true" />
-                <element signature="e#3009#3010#0" expanded="true" />
-                <element signature="e#3046#3047#0" expanded="true" />
-                <element signature="e#3106#3107#0" expanded="true" />
-                <element signature="e#3158#3159#0" expanded="true" />
-                <element signature="e#3198#3199#0" expanded="true" />
-                <element signature="e#3234#3235#0" expanded="true" />
-                <element signature="e#3292#3293#0" expanded="true" />
-                <element signature="e#3342#3343#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="76">
+              <caret line="4" column="14" lean-forward="false" selection-start-line="4" selection-start-column="14" selection-end-line="4" selection-end-column="14" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -129,18 +78,8 @@
       <file leaf-file-name="SessionDetailDao.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/cn/edu/hust/dao/SessionDetailDao.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="95">
-              <caret line="5" column="43" lean-forward="false" selection-start-line="5" selection-start-column="43" selection-end-line="5" selection-end-column="43" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="SessionDetailDaoImpl.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/cn/edu/hust/dao/impl/SessionDetailDaoImpl.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="266">
-              <caret line="14" column="58" lean-forward="false" selection-start-line="14" selection-start-column="58" selection-end-line="14" selection-end-column="58" />
+            <state relative-caret-position="171">
+              <caret line="9" column="10" lean-forward="false" selection-start-line="9" selection-start-column="10" selection-end-line="9" selection-end-column="10" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -148,13 +87,27 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="MockData.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/cn/edu/hust/mockData/MockData.java">
+      <file leaf-file-name="SessionDetailDaoImpl.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/cn/edu/hust/dao/impl/SessionDetailDaoImpl.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="506">
-              <caret line="96" column="48" lean-forward="false" selection-start-line="96" selection-start-column="48" selection-end-line="96" selection-end-column="48" />
+            <state relative-caret-position="206">
+              <caret line="20" column="0" lean-forward="true" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
+                <element signature="e#1162#1172#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="SessionRandomExtractDaoTest.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/test/java/cn/edu/hust/dao/SessionRandomExtractDaoTest.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="209">
+              <caret line="11" column="23" lean-forward="false" selection-start-line="11" selection-start-column="16" selection-end-line="11" selection-end-column="31" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#359#381#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -190,7 +143,6 @@
         <option value="$PROJECT_DIR$/src/main/java/cn/edu/hust/dao/TaskDao.java" />
         <option value="$PROJECT_DIR$/src/test/java/cn/edu/hust/dao/dao.java" />
         <option value="$PROJECT_DIR$/src/test/java/cn/edu/hust/json/FastJsonTest.java" />
-        <option value="$PROJECT_DIR$/src/main/resources/conf.properties" />
         <option value="$PROJECT_DIR$/src/main/java/cn/edu/hust/conf/ConfigurationManager.java" />
         <option value="$PROJECT_DIR$/src/main/java/cn/edu/hust/mockData/MockData.java" />
         <option value="$PROJECT_DIR$/src/main/java/cn/edu/hust/domain/Task.java" />
@@ -201,7 +153,6 @@
         <option value="$PROJECT_DIR$/src/test/java/cn/edu/hust/utils/ParamUtilsTest.java" />
         <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/README.md" />
-        <option value="$PROJECT_DIR$/src/main/java/cn/edu/hust/dao/SessionAggrStatDao.java" />
         <option value="$PROJECT_DIR$/src/main/java/cn/edu/hust/domain/SessionAggrStat.java" />
         <option value="$PROJECT_DIR$/src/main/java/cn/edu/hust/dao/impl/SessionAggrStatDaoImpl.java" />
         <option value="$PROJECT_DIR$/src/test/java/cn/edu/hust/dao/SessionAggrDao.java" />
@@ -214,11 +165,15 @@
         <option value="$PROJECT_DIR$/src/main/java/cn/edu/hust/dao/SessionRandomExtractDao.java" />
         <option value="$PROJECT_DIR$/src/main/java/cn/edu/hust/dao/impl/SessionRandomExtractDaoImpl.java" />
         <option value="$PROJECT_DIR$/src/main/java/cn/edu/hust/dao/impl/SessionDetailDao.java" />
-        <option value="$PROJECT_DIR$/src/main/java/cn/edu/hust/dao/SessionDetailDao.java" />
-        <option value="$PROJECT_DIR$/src/main/java/cn/edu/hust/dao/impl/SessionDetailDaoImpl.java" />
         <option value="$PROJECT_DIR$/src/main/java/cn/edu/hust/domain/SessionDetail.java" />
         <option value="$PROJECT_DIR$/src/main/java/cn/edu/hust/dao/factory/DaoFactory.java" />
+        <option value="$PROJECT_DIR$/src/test/java/cn/edu/hust/dao/SessionDetailTest.java" />
+        <option value="$PROJECT_DIR$/src/test/java/cn/edu/hust/dao/SessionRandomExtractDaoTest.java" />
+        <option value="$PROJECT_DIR$/src/main/java/cn/edu/hust/dao/SessionDetailDao.java" />
+        <option value="$PROJECT_DIR$/src/main/java/cn/edu/hust/dao/impl/SessionDetailDaoImpl.java" />
         <option value="$PROJECT_DIR$/src/main/java/cn/edu/hust/session/UserVisitAnalyze.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/conf.properties" />
+        <option value="$PROJECT_DIR$/src/main/java/cn/edu/hust/dao/SessionAggrStatDao.java" />
       </list>
     </option>
   </component>
@@ -369,7 +324,25 @@
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="hust" type="462c0819:PsiDirectoryNode" />
+              <item name="demo" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="UserActionAnalyzePlatform" type="b2602c69:ProjectViewProjectNode" />
+              <item name="UserActionAnalyzePlatform" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="hust" type="462c0819:PsiDirectoryNode" />
               <item name="domain" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="UserActionAnalyzePlatform" type="b2602c69:ProjectViewProjectNode" />
+              <item name="UserActionAnalyzePlatform" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="hust" type="462c0819:PsiDirectoryNode" />
+              <item name="jdbc" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="UserActionAnalyzePlatform" type="b2602c69:ProjectViewProjectNode" />
@@ -393,6 +366,13 @@
               <item name="UserActionAnalyzePlatform" type="b2602c69:ProjectViewProjectNode" />
               <item name="UserActionAnalyzePlatform" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="UserActionAnalyzePlatform" type="b2602c69:ProjectViewProjectNode" />
+              <item name="UserActionAnalyzePlatform" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="test" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -401,6 +381,23 @@
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="test" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="UserActionAnalyzePlatform" type="b2602c69:ProjectViewProjectNode" />
+              <item name="UserActionAnalyzePlatform" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="test" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="hust" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="UserActionAnalyzePlatform" type="b2602c69:ProjectViewProjectNode" />
+              <item name="UserActionAnalyzePlatform" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="test" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="hust" type="462c0819:PsiDirectoryNode" />
+              <item name="dao" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -484,31 +481,6 @@
       <module name="" />
       <envs />
     </configuration>
-    <configuration name="FastJsonTest.test1" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
-        <pattern>
-          <option name="PATTERN" value="cn.edu.hust.json.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <module name="UserActionAnalyzePlatform" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" value="cn.edu.hust.json" />
-      <option name="MAIN_CLASS_NAME" value="cn.edu.hust.json.FastJsonTest" />
-      <option name="METHOD_NAME" value="test1" />
-      <option name="TEST_OBJECT" value="method" />
-      <option name="VM_PARAMETERS" value="-ea" />
-      <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="singleModule" />
-      </option>
-      <envs />
-      <patterns />
-    </configuration>
     <configuration name="ParamUtilsTest.test2" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
         <pattern>
@@ -559,7 +531,7 @@
       <envs />
       <patterns />
     </configuration>
-    <configuration name="TaskDaoTest.testDao" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="SessionDetailTest.testInsert" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
         <pattern>
           <option name="PATTERN" value="cn.edu.hust.dao.*" />
@@ -570,8 +542,33 @@
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" />
       <option name="PACKAGE_NAME" value="cn.edu.hust.dao" />
-      <option name="MAIN_CLASS_NAME" value="cn.edu.hust.dao.TaskDaoTest" />
-      <option name="METHOD_NAME" value="testDao" />
+      <option name="MAIN_CLASS_NAME" value="cn.edu.hust.dao.SessionDetailTest" />
+      <option name="METHOD_NAME" value="testInsert" />
+      <option name="TEST_OBJECT" value="method" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <envs />
+      <patterns />
+    </configuration>
+    <configuration name="SessionRandomExtractDaoTest.testBatchInsert" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
+        <pattern>
+          <option name="PATTERN" value="cn.edu.hust.dao.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <module name="UserActionAnalyzePlatform" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" value="cn.edu.hust.dao" />
+      <option name="MAIN_CLASS_NAME" value="cn.edu.hust.dao.SessionRandomExtractDaoTest" />
+      <option name="METHOD_NAME" value="testBatchInsert" />
       <option name="TEST_OBJECT" value="method" />
       <option name="VM_PARAMETERS" value="-ea" />
       <option name="PARAMETERS" />
@@ -645,19 +642,19 @@
       <predefined_log_file id="idea.log" enabled="true" />
     </configuration>
     <list size="5">
-      <item index="0" class="java.lang.String" itemvalue="JUnit.TaskDaoTest.testDao" />
-      <item index="1" class="java.lang.String" itemvalue="JUnit.FastJsonTest.test1" />
-      <item index="2" class="java.lang.String" itemvalue="Application.UserVisitAnalyze" />
-      <item index="3" class="java.lang.String" itemvalue="JUnit.ParamUtilsTest.test2" />
-      <item index="4" class="java.lang.String" itemvalue="JUnit.SessionAggrDao.test" />
+      <item index="0" class="java.lang.String" itemvalue="Application.UserVisitAnalyze" />
+      <item index="1" class="java.lang.String" itemvalue="JUnit.ParamUtilsTest.test2" />
+      <item index="2" class="java.lang.String" itemvalue="JUnit.SessionAggrDao.test" />
+      <item index="3" class="java.lang.String" itemvalue="JUnit.SessionDetailTest.testInsert" />
+      <item index="4" class="java.lang.String" itemvalue="JUnit.SessionRandomExtractDaoTest.testBatchInsert" />
     </list>
     <recent_temporary>
       <list size="5">
         <item index="0" class="java.lang.String" itemvalue="Application.UserVisitAnalyze" />
-        <item index="1" class="java.lang.String" itemvalue="JUnit.SessionAggrDao.test" />
-        <item index="2" class="java.lang.String" itemvalue="JUnit.ParamUtilsTest.test2" />
-        <item index="3" class="java.lang.String" itemvalue="JUnit.TaskDaoTest.testDao" />
-        <item index="4" class="java.lang.String" itemvalue="JUnit.FastJsonTest.test1" />
+        <item index="1" class="java.lang.String" itemvalue="JUnit.SessionRandomExtractDaoTest.testBatchInsert" />
+        <item index="2" class="java.lang.String" itemvalue="JUnit.SessionDetailTest.testInsert" />
+        <item index="3" class="java.lang.String" itemvalue="JUnit.SessionAggrDao.test" />
+        <item index="4" class="java.lang.String" itemvalue="JUnit.ParamUtilsTest.test2" />
       </list>
     </recent_temporary>
   </component>
@@ -678,7 +675,7 @@
       <workItem from="1529590333052" duration="2564000" />
       <workItem from="1529630336674" duration="15098000" />
       <workItem from="1529666057370" duration="13151000" />
-      <workItem from="1529717692529" duration="12619000" />
+      <workItem from="1529717692529" duration="20390000" />
     </task>
     <task id="LOCAL-00001" summary="1.环境搭建完成&#10;2.相关的工具类编写完成&#10;3.配置文件管理类编写完成">
       <created>1529592741848</created>
@@ -698,20 +695,20 @@
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="ParamUtilsTest_test2 - 2018.06.22 at 20h 22m 02s.xml">
-      <configuration name="ParamUtilsTest.test2" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="ParamUtilsTest_test2 - 2018.06.22 at 20h 27m 14s.xml">
-      <configuration name="ParamUtilsTest.test2" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="ParamUtilsTest_test2 - 2018.06.22 at 20h 27m 37s.xml">
-      <configuration name="ParamUtilsTest.test2" configurationId="JUnit" />
-    </history-entry>
     <history-entry file="ParamUtilsTest_test2 - 2018.06.22 at 20h 27m 46s.xml">
       <configuration name="ParamUtilsTest.test2" configurationId="JUnit" />
     </history-entry>
     <history-entry file="SessionAggrDao_test - 2018.06.22 at 23h 11m 57s.xml">
       <configuration name="SessionAggrDao.test" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="SessionDetailTest_testInsert - 2018.06.23 at 17h 02m 57s.xml">
+      <configuration name="SessionDetailTest.testInsert" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="SessionDetailTest_testInsert - 2018.06.23 at 17h 04m 26s.xml">
+      <configuration name="SessionDetailTest.testInsert" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="SessionRandomExtractDaoTest_testBatchInsert - 2018.06.23 at 17h 10m 45s.xml">
+      <configuration name="SessionRandomExtractDaoTest.testBatchInsert" configurationId="JUnit" />
     </history-entry>
     <history-entry file="TaskDaoTest_testDao - 2018.06.22 at 14h 48m 43s.xml">
       <configuration name="TaskDaoTest.testDao" configurationId="JUnit" />
@@ -730,7 +727,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="44466000" />
+    <option name="totallyTimeSpent" value="52237000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
@@ -834,106 +831,11 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="7" />
+      <option name="time" value="27" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/cn/edu/hust/constant/Constants.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="437">
-          <caret line="23" column="49" lean-forward="false" selection-start-line="23" selection-start-column="49" selection-end-line="23" selection-end-column="49" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/cn/edu/hust/mockData/MockData.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2299">
-          <caret line="136" column="48" lean-forward="false" selection-start-line="136" selection-start-column="45" selection-end-line="136" selection-end-column="48" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/cn/edu/hust/domain/Task.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="152">
-          <caret line="8" column="28" lean-forward="false" selection-start-line="8" selection-start-column="19" selection-end-line="8" selection-end-column="28" />
-          <folding>
-            <element signature="e#847#848#0" expanded="false" />
-            <element signature="e#876#877#0" expanded="false" />
-            <element signature="e#918#919#0" expanded="false" />
-            <element signature="e#954#955#0" expanded="false" />
-            <element signature="e#989#990#0" expanded="false" />
-            <element signature="e#1020#1021#0" expanded="false" />
-            <element signature="e#1068#1069#0" expanded="false" />
-            <element signature="e#1108#1109#0" expanded="false" />
-            <element signature="e#1145#1146#0" expanded="false" />
-            <element signature="e#1178#1179#0" expanded="false" />
-            <element signature="e#1230#1231#0" expanded="false" />
-            <element signature="e#1274#1275#0" expanded="false" />
-            <element signature="e#1310#1311#0" expanded="false" />
-            <element signature="e#1342#1343#0" expanded="false" />
-            <element signature="e#1392#1393#0" expanded="false" />
-            <element signature="e#1434#1435#0" expanded="false" />
-            <element signature="e#1471#1472#0" expanded="false" />
-            <element signature="e#1504#1505#0" expanded="false" />
-            <element signature="e#1556#1557#0" expanded="false" />
-            <element signature="e#1600#1601#0" expanded="false" />
-            <element signature="e#1635#1636#0" expanded="false" />
-            <element signature="e#1666#1667#0" expanded="false" />
-            <element signature="e#1714#1715#0" expanded="false" />
-            <element signature="e#1754#1755#0" expanded="false" />
-            <element signature="e#1791#1792#0" expanded="false" />
-            <element signature="e#1824#1825#0" expanded="false" />
-            <element signature="e#1876#1877#0" expanded="false" />
-            <element signature="e#1920#1921#0" expanded="false" />
-            <element signature="e#1956#1957#0" expanded="false" />
-            <element signature="e#1988#1989#0" expanded="false" />
-            <element signature="e#2038#2039#0" expanded="false" />
-            <element signature="e#2080#2081#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/cn/edu/hust/conf/ConfigurationManager.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="532">
-          <caret line="29" column="22" lean-forward="false" selection-start-line="29" selection-start-column="22" selection-end-line="29" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/conf.properties">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="19">
-          <caret line="1" column="11" lean-forward="false" selection-start-line="1" selection-start-column="11" selection-end-line="1" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1539">
-          <caret line="81" column="0" lean-forward="false" selection-start-line="81" selection-start-column="0" selection-end-line="81" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/cn/edu/hust/util/NumberUtils.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="247">
-          <caret line="13" column="20" lean-forward="false" selection-start-line="13" selection-start-column="20" selection-end-line="13" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/cn/edu/hust/util/ValidUtils.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1305">
-          <caret line="7" column="13" lean-forward="false" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/.gitignore">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -980,6 +882,11 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="434">
           <caret line="28" column="4" lean-forward="false" selection-start-line="28" selection-start-column="4" selection-end-line="28" selection-end-column="4" />
+          <folding>
+            <element signature="imports" expanded="false" />
+            <element signature="e#919#1311#0" expanded="false" />
+            <element signature="e#1310#1311#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -994,6 +901,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="912">
           <caret line="52" column="9" lean-forward="true" selection-start-line="52" selection-start-column="9" selection-end-line="52" selection-end-column="9" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1042,6 +950,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="152">
           <caret line="10" column="49" lean-forward="false" selection-start-line="10" selection-start-column="49" selection-end-line="10" selection-end-column="49" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1049,13 +958,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="247">
           <caret line="13" column="63" lean-forward="false" selection-start-line="13" selection-start-column="63" selection-end-line="13" selection-end-column="63" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/conf.properties">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="95">
-          <caret line="5" column="17" lean-forward="false" selection-start-line="5" selection-start-column="17" selection-end-line="5" selection-end-column="17" />
         </state>
       </provider>
     </entry>
@@ -1104,14 +1006,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/cn/edu/hust/dao/SessionAggrStatDao.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="95">
-          <caret line="5" column="47" lean-forward="false" selection-start-line="5" selection-start-column="47" selection-end-line="5" selection-end-column="47" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_144.jdk/Contents/Home/src.zip!/java/lang/Long.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="171">
@@ -1135,68 +1029,68 @@
         <state relative-caret-position="443">
           <caret line="114" column="27" lean-forward="false" selection-start-line="114" selection-start-column="27" selection-end-line="114" selection-end-column="27" />
           <folding>
-            <element signature="e#2125#2126#0" expanded="true" />
-            <element signature="e#2154#2155#0" expanded="true" />
-            <element signature="e#2196#2197#0" expanded="true" />
-            <element signature="e#2232#2233#0" expanded="true" />
-            <element signature="e#2269#2270#0" expanded="true" />
-            <element signature="e#2304#2305#0" expanded="true" />
-            <element signature="e#2358#2359#0" expanded="true" />
-            <element signature="e#2401#2402#0" expanded="true" />
-            <element signature="e#2446#2447#0" expanded="true" />
-            <element signature="e#2487#2488#0" expanded="true" />
-            <element signature="e#2555#2556#0" expanded="true" />
-            <element signature="e#2615#2616#0" expanded="true" />
-            <element signature="e#2660#2661#0" expanded="true" />
-            <element signature="e#2701#2702#0" expanded="true" />
-            <element signature="e#2769#2770#0" expanded="true" />
-            <element signature="e#2829#2830#0" expanded="true" />
-            <element signature="e#2874#2875#0" expanded="true" />
-            <element signature="e#2915#2916#0" expanded="true" />
-            <element signature="e#2983#2984#0" expanded="true" />
-            <element signature="e#3043#3044#0" expanded="true" />
-            <element signature="e#3090#3091#0" expanded="true" />
-            <element signature="e#3133#3134#0" expanded="true" />
-            <element signature="e#3316#3317#0" expanded="true" />
-            <element signature="e#3359#3360#0" expanded="true" />
-            <element signature="e#3540#3541#0" expanded="true" />
-            <element signature="e#3581#3582#0" expanded="true" />
-            <element signature="e#3649#3650#0" expanded="true" />
-            <element signature="e#3709#3710#0" expanded="true" />
-            <element signature="e#3755#3756#0" expanded="true" />
-            <element signature="e#3797#3798#0" expanded="true" />
-            <element signature="e#3865#3866#0" expanded="true" />
-            <element signature="e#3926#3927#0" expanded="true" />
-            <element signature="e#3973#3974#0" expanded="true" />
-            <element signature="e#4016#4017#0" expanded="true" />
-            <element signature="e#4195#4196#0" expanded="true" />
-            <element signature="e#4234#4235#0" expanded="true" />
-            <element signature="e#4298#4299#0" expanded="true" />
-            <element signature="e#4354#4355#0" expanded="true" />
-            <element signature="e#4396#4397#0" expanded="true" />
-            <element signature="e#4434#4435#0" expanded="true" />
-            <element signature="e#4496#4497#0" expanded="true" />
-            <element signature="e#4550#4551#0" expanded="true" />
-            <element signature="e#4592#4593#0" expanded="true" />
-            <element signature="e#4630#4631#0" expanded="true" />
-            <element signature="e#4692#4693#0" expanded="true" />
-            <element signature="e#4746#4747#0" expanded="true" />
-            <element signature="e#4788#4789#0" expanded="true" />
-            <element signature="e#4826#4827#0" expanded="true" />
-            <element signature="e#4888#4889#0" expanded="true" />
-            <element signature="e#4942#4943#0" expanded="true" />
-            <element signature="e#4986#4987#0" expanded="true" />
-            <element signature="e#5026#5027#0" expanded="true" />
-            <element signature="e#5092#5093#0" expanded="true" />
-            <element signature="e#5150#5151#0" expanded="true" />
-            <element signature="e#5194#5195#0" expanded="true" />
-            <element signature="e#5234#5235#0" expanded="true" />
-            <element signature="e#5300#5301#0" expanded="true" />
-            <element signature="e#5358#5359#0" expanded="true" />
-            <element signature="e#5399#5400#0" expanded="true" />
-            <element signature="e#5436#5437#0" expanded="true" />
-            <element signature="e#5496#5497#0" expanded="true" />
-            <element signature="e#5548#5549#0" expanded="true" />
+            <element signature="e#2125#2126#0" expanded="false" />
+            <element signature="e#2154#2155#0" expanded="false" />
+            <element signature="e#2196#2197#0" expanded="false" />
+            <element signature="e#2232#2233#0" expanded="false" />
+            <element signature="e#2269#2270#0" expanded="false" />
+            <element signature="e#2304#2305#0" expanded="false" />
+            <element signature="e#2358#2359#0" expanded="false" />
+            <element signature="e#2401#2402#0" expanded="false" />
+            <element signature="e#2446#2447#0" expanded="false" />
+            <element signature="e#2487#2488#0" expanded="false" />
+            <element signature="e#2555#2556#0" expanded="false" />
+            <element signature="e#2615#2616#0" expanded="false" />
+            <element signature="e#2660#2661#0" expanded="false" />
+            <element signature="e#2701#2702#0" expanded="false" />
+            <element signature="e#2769#2770#0" expanded="false" />
+            <element signature="e#2829#2830#0" expanded="false" />
+            <element signature="e#2874#2875#0" expanded="false" />
+            <element signature="e#2915#2916#0" expanded="false" />
+            <element signature="e#2983#2984#0" expanded="false" />
+            <element signature="e#3043#3044#0" expanded="false" />
+            <element signature="e#3090#3091#0" expanded="false" />
+            <element signature="e#3133#3134#0" expanded="false" />
+            <element signature="e#3316#3317#0" expanded="false" />
+            <element signature="e#3359#3360#0" expanded="false" />
+            <element signature="e#3540#3541#0" expanded="false" />
+            <element signature="e#3581#3582#0" expanded="false" />
+            <element signature="e#3649#3650#0" expanded="false" />
+            <element signature="e#3709#3710#0" expanded="false" />
+            <element signature="e#3755#3756#0" expanded="false" />
+            <element signature="e#3797#3798#0" expanded="false" />
+            <element signature="e#3865#3866#0" expanded="false" />
+            <element signature="e#3926#3927#0" expanded="false" />
+            <element signature="e#3973#3974#0" expanded="false" />
+            <element signature="e#4016#4017#0" expanded="false" />
+            <element signature="e#4195#4196#0" expanded="false" />
+            <element signature="e#4234#4235#0" expanded="false" />
+            <element signature="e#4298#4299#0" expanded="false" />
+            <element signature="e#4354#4355#0" expanded="false" />
+            <element signature="e#4396#4397#0" expanded="false" />
+            <element signature="e#4434#4435#0" expanded="false" />
+            <element signature="e#4496#4497#0" expanded="false" />
+            <element signature="e#4550#4551#0" expanded="false" />
+            <element signature="e#4592#4593#0" expanded="false" />
+            <element signature="e#4630#4631#0" expanded="false" />
+            <element signature="e#4692#4693#0" expanded="false" />
+            <element signature="e#4746#4747#0" expanded="false" />
+            <element signature="e#4788#4789#0" expanded="false" />
+            <element signature="e#4826#4827#0" expanded="false" />
+            <element signature="e#4888#4889#0" expanded="false" />
+            <element signature="e#4942#4943#0" expanded="false" />
+            <element signature="e#4986#4987#0" expanded="false" />
+            <element signature="e#5026#5027#0" expanded="false" />
+            <element signature="e#5092#5093#0" expanded="false" />
+            <element signature="e#5150#5151#0" expanded="false" />
+            <element signature="e#5194#5195#0" expanded="false" />
+            <element signature="e#5234#5235#0" expanded="false" />
+            <element signature="e#5300#5301#0" expanded="false" />
+            <element signature="e#5358#5359#0" expanded="false" />
+            <element signature="e#5399#5400#0" expanded="false" />
+            <element signature="e#5436#5437#0" expanded="false" />
+            <element signature="e#5496#5497#0" expanded="false" />
+            <element signature="e#5548#5549#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1232,14 +1126,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/cn/edu/hust/constant/Constants.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="494">
-          <caret line="26" column="47" lean-forward="false" selection-start-line="26" selection-start-column="31" selection-end-line="26" selection-end-column="47" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/cn/edu/hust/util/DateUtils.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="52">
@@ -1256,7 +1142,7 @@
         <state relative-caret-position="156">
           <caret line="15" column="0" lean-forward="false" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
           <folding>
-            <element signature="e#247#248#0" expanded="true" />
+            <element signature="e#247#248#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1284,55 +1170,10 @@
         <state relative-caret-position="473">
           <caret line="41" column="46" lean-forward="true" selection-start-line="41" selection-start-column="46" selection-end-line="41" selection-end-column="46" />
           <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#294#295#0" expanded="true" />
-            <element signature="e#326#327#0" expanded="true" />
+            <element signature="imports" expanded="false" />
+            <element signature="e#294#295#0" expanded="false" />
+            <element signature="e#326#327#0" expanded="false" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/cn/edu/hust/domain/SessionRandomExtract.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="38">
-          <caret line="4" column="33" lean-forward="false" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="33" />
-          <folding>
-            <element signature="e#680#681#0" expanded="true" />
-            <element signature="e#709#710#0" expanded="true" />
-            <element signature="e#751#752#0" expanded="true" />
-            <element signature="e#787#788#0" expanded="true" />
-            <element signature="e#823#824#0" expanded="true" />
-            <element signature="e#855#856#0" expanded="true" />
-            <element signature="e#905#906#0" expanded="true" />
-            <element signature="e#947#948#0" expanded="true" />
-            <element signature="e#983#984#0" expanded="true" />
-            <element signature="e#1015#1016#0" expanded="true" />
-            <element signature="e#1065#1066#0" expanded="true" />
-            <element signature="e#1107#1108#0" expanded="true" />
-            <element signature="e#1148#1149#0" expanded="true" />
-            <element signature="e#1185#1186#0" expanded="true" />
-            <element signature="e#1245#1246#0" expanded="true" />
-            <element signature="e#1297#1298#0" expanded="true" />
-            <element signature="e#1342#1343#0" expanded="true" />
-            <element signature="e#1383#1384#0" expanded="true" />
-            <element signature="e#1451#1452#0" expanded="true" />
-            <element signature="e#1511#1512#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/apache/spark/spark-core_2.10/1.5.1/spark-core_2.10-1.5.1.jar!/org/apache/spark/api/java/JavaPairRDD.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="109">
-          <caret line="128" column="0" lean-forward="true" selection-start-line="128" selection-start-column="0" selection-end-line="128" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/cn/edu/hust/jdbc/JDBCHelper.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="266">
-          <caret line="154" column="17" lean-forward="false" selection-start-line="154" selection-start-column="17" selection-end-line="154" selection-end-column="17" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1351,16 +1192,8 @@
         <state relative-caret-position="228">
           <caret line="17" column="34" lean-forward="false" selection-start-line="17" selection-start-column="34" selection-end-line="17" selection-end-column="34" />
           <folding>
-            <element signature="e#511#521#0" expanded="true" />
+            <element signature="e#511#521#0" expanded="false" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/cn/edu/hust/dao/SessionDetailDao.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="95">
-          <caret line="5" column="43" lean-forward="false" selection-start-line="5" selection-start-column="43" selection-end-line="5" selection-end-column="43" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1421,22 +1254,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/cn/edu/hust/dao/impl/SessionDetailDaoImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="266">
-          <caret line="14" column="58" lean-forward="false" selection-start-line="14" selection-start-column="58" selection-end-line="14" selection-end-column="58" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/cn/edu/hust/mockData/MockData.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="506">
           <caret line="96" column="48" lean-forward="false" selection-start-line="96" selection-start-column="48" selection-end-line="96" selection-end-column="48" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="imports" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1454,33 +1277,198 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/cn/edu/hust/session/UserVisitAnalyze.java">
+    <entry file="jar://$MAVEN_REPOSITORY$/org/apache/spark/spark-core_2.10/1.5.1/spark-core_2.10-1.5.1.jar!/org/apache/spark/api/java/AbstractJavaRDDLike.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="430">
-          <caret line="538" column="58" lean-forward="false" selection-start-line="538" selection-start-column="58" selection-end-line="538" selection-end-column="58" />
+        <state relative-caret-position="208">
+          <caret line="346" column="0" lean-forward="false" selection-start-line="346" selection-start-column="0" selection-end-line="346" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/scala-lang/scala-library/2.10.4/scala-library-2.10.4.jar!/scala/Function1$class.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="303">
+          <caret line="312" column="0" lean-forward="false" selection-start-line="312" selection-start-column="0" selection-end-line="312" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/scala-lang/scala-library/2.10.4/scala-library-2.10.4.jar!/scala/runtime/AbstractFunction1.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="284">
+          <caret line="316" column="0" lean-forward="false" selection-start-line="316" selection-start-column="0" selection-end-line="316" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/apache/spark/spark-core_2.10/1.5.1/spark-core_2.10-1.5.1.jar!/org/apache/spark/api/java/JavaPairRDD.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="228" column="0" lean-forward="false" selection-start-line="228" selection-start-column="0" selection-end-line="228" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/apache/spark/spark-core_2.10/1.5.1/spark-core_2.10-1.5.1.jar!/org/apache/spark/api/java/JavaPairRDD$.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="151">
+          <caret line="104" column="0" lean-forward="false" selection-start-line="104" selection-start-column="0" selection-end-line="104" selection-end-column="0" />
+          <folding>
+            <element signature="e#5869#6059#0" expanded="true" />
+            <element signature="e#6058#6059#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/apache/spark/spark-core_2.10/1.5.1/spark-core_2.10-1.5.1.jar!/org/apache/spark/api/java/JavaRDDLike$class.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret line="405" column="0" lean-forward="false" selection-start-line="405" selection-start-column="0" selection-end-line="405" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/scala-lang/scala-library/2.10.4/scala-library-2.10.4.jar!/scala/reflect/ClassTag$.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret line="179" column="0" lean-forward="false" selection-start-line="179" selection-start-column="0" selection-end-line="179" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/cn/edu/hust/constant/Constants.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-224">
+          <caret line="2" column="13" lean-forward="false" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/cn/edu/hust/dao/SessionDetailTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="152">
+          <caret line="8" column="20" lean-forward="true" selection-start-line="8" selection-start-column="16" selection-end-line="8" selection-end-column="26" />
+          <folding>
+            <element signature="imports" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/cn/edu/hust/domain/SessionRandomExtract.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="209">
+          <caret line="11" column="11" lean-forward="false" selection-start-line="11" selection-start-column="11" selection-end-line="11" selection-end-column="11" />
+          <folding>
+            <element signature="e#680#681#0" expanded="true" />
+            <element signature="e#709#710#0" expanded="true" />
+            <element signature="e#751#752#0" expanded="true" />
+            <element signature="e#787#788#0" expanded="true" />
+            <element signature="e#823#824#0" expanded="true" />
+            <element signature="e#855#856#0" expanded="true" />
+            <element signature="e#905#906#0" expanded="true" />
+            <element signature="e#947#948#0" expanded="true" />
+            <element signature="e#983#984#0" expanded="true" />
+            <element signature="e#1015#1016#0" expanded="true" />
+            <element signature="e#1065#1066#0" expanded="true" />
+            <element signature="e#1107#1108#0" expanded="true" />
+            <element signature="e#1148#1149#0" expanded="true" />
+            <element signature="e#1185#1186#0" expanded="true" />
+            <element signature="e#1245#1246#0" expanded="true" />
+            <element signature="e#1297#1298#0" expanded="true" />
+            <element signature="e#1342#1343#0" expanded="true" />
+            <element signature="e#1383#1384#0" expanded="true" />
+            <element signature="e#1451#1452#0" expanded="true" />
+            <element signature="e#1511#1512#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/cn/edu/hust/dao/SessionRandomExtractDaoTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="209">
+          <caret line="11" column="23" lean-forward="false" selection-start-line="11" selection-start-column="16" selection-end-line="11" selection-end-column="31" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#4969#5195#0" expanded="true" />
-            <element signature="e#5194#5195#0" expanded="true" />
-            <element signature="e#5544#5769#0" expanded="true" />
-            <element signature="e#5768#5769#0" expanded="true" />
-            <element signature="e#5999#8795#0" expanded="true" />
-            <element signature="e#8794#8795#0" expanded="true" />
-            <element signature="e#9015#9238#0" expanded="true" />
-            <element signature="e#9237#9238#0" expanded="true" />
-            <element signature="e#9491#10505#0" expanded="true" />
-            <element signature="e#10504#10505#0" expanded="true" />
-            <element signature="e#16802#17326#0" expanded="true" />
-            <element signature="e#17325#17326#0" expanded="true" />
-            <element signature="e#17567#17594#0" expanded="true" />
-            <element signature="e#18376#18409#0" expanded="true" />
-            <element signature="e#20587#22697#0" expanded="true" />
-            <element signature="e#21053#21077#0" expanded="true" />
-            <element signature="e#21282#21304#0" expanded="true" />
-            <element signature="e#22696#22697#0" expanded="true" />
-            <element signature="e#22961#24328#0" expanded="true" />
-            <element signature="e#24327#24328#0" expanded="true" />
+            <element signature="e#359#381#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/cn/edu/hust/dao/SessionDetailDao.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="171">
+          <caret line="9" column="10" lean-forward="false" selection-start-line="9" selection-start-column="10" selection-end-line="9" selection-end-column="10" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/cn/edu/hust/dao/impl/SessionDetailDaoImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="206">
+          <caret line="20" column="0" lean-forward="true" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#1162#1172#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/cn/edu/hust/session/UserVisitAnalyze.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1284">
+          <caret line="100" column="10" lean-forward="false" selection-start-line="100" selection-start-column="10" selection-end-line="100" selection-end-column="10" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#4973#5199#0" expanded="true" />
+            <element signature="e#5198#5199#0" expanded="true" />
+            <element signature="e#5548#5773#0" expanded="true" />
+            <element signature="e#5772#5773#0" expanded="true" />
+            <element signature="e#6003#8821#0" expanded="true" />
+            <element signature="e#8820#8821#0" expanded="true" />
+            <element signature="e#9041#9264#0" expanded="true" />
+            <element signature="e#9263#9264#0" expanded="true" />
+            <element signature="e#9517#10531#0" expanded="true" />
+            <element signature="e#10530#10531#0" expanded="true" />
+            <element signature="e#16828#17352#0" expanded="true" />
+            <element signature="e#17351#17352#0" expanded="true" />
+            <element signature="e#17593#17620#0" expanded="true" />
+            <element signature="e#18402#18435#0" expanded="true" />
+            <element signature="e#20610#22709#0" expanded="true" />
+            <element signature="e#21076#21100#0" expanded="true" />
+            <element signature="e#21305#21327#0" expanded="true" />
+            <element signature="e#22708#22709#0" expanded="true" />
+            <element signature="e#22891#24423#0" expanded="true" />
+            <element signature="e#23158#23173#0" expanded="true" />
+            <element signature="e#24422#24423#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/conf.properties">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="76">
+          <caret line="4" column="14" lean-forward="false" selection-start-line="4" selection-start-column="14" selection-end-line="4" selection-end-column="14" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/cn/edu/hust/dao/SessionAggrStatDao.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="171">
+          <caret line="9" column="0" lean-forward="true" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/cn/edu/hust/jdbc/JDBCHelper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="473">
+          <caret line="44" column="0" lean-forward="true" selection-start-line="44" selection-start-column="0" selection-end-line="44" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>

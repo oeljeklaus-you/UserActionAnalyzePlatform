@@ -91,12 +91,14 @@ public class UserVisitAnalyze {
          *         如果不考虑性能的话，就会导致一个大数据处理程序运行长达数个小时，甚至是数个小时，对用户的体验，简直是
          *         一场灾难。
          */
-        //在使用Accumulutor之前，需要使用Action算子，否则获取的值为空，这里随机计算
-        filteredSessionRDD.count();
+
         /**
          * 使用CountByKey算子实现随机抽取功能
          */
         randomExtractSession(taskId,filteredSessionRDD,sessionInfoPairRDD);
+
+        //在使用Accumulutor之前，需要使用Action算子，否则获取的值为空，这里随机计算
+        //filteredSessionRDD.count();
         //计算各个session占比,并写入MySQL
         calculateAndPersist(sessionAggrStatAccumulator.value(),taskId);
         //关闭spark上下文
@@ -233,7 +235,7 @@ public class UserVisitAnalyze {
                 String clickCategoryIdsInfo=StringUtils.trimComma(clickCategoryIds.toString());
                 String info=Constants.FIELD_SESSIONID+"="+sessionId+"|"+Constants.FIELD_SERACH_KEYWORDS+"="+searchKeywordsInfo+"|"
                         +Constants.FIELD_CLICK_CATEGORYIDS+"="+clickCategoryIdsInfo+"|"+Constants.FIELD_VISIT_LENGTH+"="+visitLengtth+"|"
-                        +Constants.FIELD_STEP_LENGTH+"="+stepLength+"|"+Constants.FIELD_START_TIME+"="+startTime;
+                        +Constants.FIELD_STEP_LENGTH+"="+stepLength+"|"+Constants.FIELD_START_TIME+"="+DateUtils.formatTime(startTime);
                 return new Tuple2<Long, String>(userId,info);
             }
         });
@@ -293,7 +295,7 @@ public class UserVisitAnalyze {
         String keyWords=ParamUtils.getParam(taskParam,Constants.PARAM_SERACH_KEYWORDS);
         String categoryIds=ParamUtils.getParam(taskParam,Constants.PARAM_CLICK_CATEGORYIDS);
 
-        //拼接时间
+        //拼接参数
         String _paramter=(startAge!=null?Constants.PARAM_STARTAGE+"="+startAge+"|":"")+
                 (endAge!=null?Constants.PARAM_ENDAGE+"="+endAge+"|":"")+(professionals!=null?Constants.PARAM_PROFESSONALS+"="+professionals+"|":"")+
                 (cities!=null?Constants.PARAM_CIYTIES+"="+cities+"|":"")+(sex!=null?Constants.PARAM_SEX+"="+sex+"|":"")+
@@ -452,7 +454,7 @@ public class UserVisitAnalyze {
                 int extractSize= (int) ((double) hourCountMap.getValue()/sessionCount*countPerday);
 
                 //如果抽离的长度大于被抽取数据的长度，那么抽取的长度就是被抽取长度
-                extractSize= extractSize>hourCountMap.getValue()?  hourCountMap.getValue().intValue():extractSize;
+                extractSize= extractSize>hourCountMap.getValue()?hourCountMap.getValue().intValue():extractSize;
 
                 //获取存储每一个小时的List
                 List<Long> indexList=dayExtactMap.get(hourCountMap.getKey());
@@ -467,7 +469,7 @@ public class UserVisitAnalyze {
                 {
                     int index=random.nextInt(hourCountMap.getValue().intValue());
                     //如果包含，那么一直循环直到不包含为止
-                    while(indexList.contains(Long.valueOf(index)));
+                    while(indexList.contains(Long.valueOf(index)))
                         index=random.nextInt(hourCountMap.getValue().intValue());
                     indexList.add(Long.valueOf(index));
                 }
@@ -490,9 +492,8 @@ public class UserVisitAnalyze {
                 //使用一个list保存需要持久化到数据库的对象
                 List<SessionRandomExtract> sessionRandomExtractList=new ArrayList<SessionRandomExtract>();
                 int index=0;
-                for (String infos:
-                        tuple2._2) {
-                    if(indexList.contains(index))
+                for (String infos:tuple2._2) {
+                    if(indexList.contains(Long.valueOf(index)))
                     {
                         //构建SessionRandomExtract
                         SessionRandomExtract sessionRandomExtract=new SessionRandomExtract();
@@ -515,10 +516,10 @@ public class UserVisitAnalyze {
 
         //3. 获取session的明细数据保存到数据库
         JavaPairRDD<String,Tuple2<String,Row>> sessionDetailRDD= sessionIds.join(sessionInfoPairRDD);
-        final SessionDetailDao sessionDetailDao=DaoFactory.getSessionDetailDao();
         sessionDetailRDD.foreachPartition(new VoidFunction<Iterator<Tuple2<String, Tuple2<String, Row>>>>() {
             @Override
             public void call(Iterator<Tuple2<String, Tuple2<String, Row>>> tuple2Iterator) throws Exception {
+                List<SessionDetail> sessionDetailList=new ArrayList<SessionDetail>();
                 while(tuple2Iterator.hasNext())
                 {
                     Tuple2<String, Tuple2<String, Row>> tuple2=tuple2Iterator.next();
@@ -536,8 +537,9 @@ public class UserVisitAnalyze {
                     String payProducetId=row.getString(11);
                     SessionDetail sessionDetail=new SessionDetail();
                     sessionDetail.set(taskId,userId,sessionId,pageId,actionTime,searchKeyWard,clickCategoryId,clickProducetId,orderCategoryId,orderProducetId,payCategoryId,payProducetId);
-                    sessionDetailDao.insert(sessionDetail);
+                    sessionDetailList.add(sessionDetail);
                 }
+                DaoFactory.getSessionDetailDao().batchInsert(sessionDetailList);
             }
         });
 
@@ -545,7 +547,7 @@ public class UserVisitAnalyze {
 
     //计算各个范围的占比，并持久化到数据库
     private static void calculateAndPersist(String value,Long taskId) {
-        System.out.println(value);
+        //System.out.println(value);
         Long sessionCount=Long.valueOf(StringUtils.getFieldFromConcatString(value,"\\|",Constants.SESSION_COUNT));
         //各个范围的访问时长
         Double visit_Length_1s_3s=Double.valueOf(StringUtils.getFieldFromConcatString(value,"\\|",Constants.TIME_PERIOD_1s_3s));
