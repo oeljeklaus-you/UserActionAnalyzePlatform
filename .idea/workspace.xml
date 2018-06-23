@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a7505764-040b-48e2-b2fc-8c5b579e595f" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/edu/hust/constant/Constants.java" afterPath="$PROJECT_DIR$/src/main/java/cn/edu/hust/constant/Constants.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/edu/hust/session/UserVisitAnalyze.java" afterPath="$PROJECT_DIR$/src/main/java/cn/edu/hust/session/UserVisitAnalyze.java" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/cn/edu/hust/session/CategorySortKey.java" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -16,7 +16,7 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="UserVisitAnalyze.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="UserVisitAnalyze.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/cn/edu/hust/session/UserVisitAnalyze.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="465">
@@ -56,6 +56,29 @@
                 <element signature="e#39113#39114#0" expanded="true" />
                 <element signature="e#39216#39407#0" expanded="true" />
                 <element signature="e#39406#39407#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="CategorySortKey.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/cn/edu/hust/session/CategorySortKey.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="171">
+              <caret line="9" column="4" lean-forward="false" selection-start-line="9" selection-start-column="4" selection-end-line="9" selection-end-column="4" />
+              <folding>
+                <element signature="e#3313#3314#0" expanded="true" />
+                <element signature="e#3346#3347#0" expanded="true" />
+                <element signature="e#3396#3397#0" expanded="true" />
+                <element signature="e#3440#3441#0" expanded="true" />
+                <element signature="e#3475#3476#0" expanded="true" />
+                <element signature="e#3508#3509#0" expanded="true" />
+                <element signature="e#3558#3559#0" expanded="true" />
+                <element signature="e#3602#3603#0" expanded="true" />
+                <element signature="e#3635#3636#0" expanded="true" />
+                <element signature="e#3666#3667#0" expanded="true" />
+                <element signature="e#3712#3713#0" expanded="true" />
+                <element signature="e#3752#3753#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -142,6 +165,8 @@
         <option value="$PROJECT_DIR$/src/main/java/cn/edu/hust/dao/SessionAggrStatDao.java" />
         <option value="$PROJECT_DIR$/src/main/java/cn/edu/hust/constant/Constants.java" />
         <option value="$PROJECT_DIR$/src/main/java/cn/edu/hust/session/UserVisitAnalyze.java" />
+        <option value="$PROJECT_DIR$/src/main/java/cn/edu/hust/session/CategorySort.java" />
+        <option value="$PROJECT_DIR$/src/main/java/cn/edu/hust/session/CategorySortKey.java" />
       </list>
     </option>
   </component>
@@ -246,15 +271,6 @@
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="hust" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="UserActionAnalyzePlatform" type="b2602c69:ProjectViewProjectNode" />
-              <item name="UserActionAnalyzePlatform" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="hust" type="462c0819:PsiDirectoryNode" />
-              <item name="mockData" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="UserActionAnalyzePlatform" type="b2602c69:ProjectViewProjectNode" />
@@ -578,7 +594,7 @@
       <workItem from="1529590333052" duration="2564000" />
       <workItem from="1529630336674" duration="15098000" />
       <workItem from="1529666057370" duration="13151000" />
-      <workItem from="1529717692529" duration="26030000" />
+      <workItem from="1529717692529" duration="27033000" />
     </task>
     <task id="LOCAL-00001" summary="1.环境搭建完成&#10;2.相关的工具类编写完成&#10;3.配置文件管理类编写完成">
       <created>1529592741848</created>
@@ -630,7 +646,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="57877000" />
+    <option name="totallyTimeSpent" value="58880000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
@@ -739,13 +755,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/.gitignore">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/.gitattributes">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -1377,6 +1386,27 @@
             <element signature="e#39113#39114#0" expanded="true" />
             <element signature="e#39216#39407#0" expanded="true" />
             <element signature="e#39406#39407#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/cn/edu/hust/session/CategorySortKey.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="171">
+          <caret line="9" column="4" lean-forward="false" selection-start-line="9" selection-start-column="4" selection-end-line="9" selection-end-column="4" />
+          <folding>
+            <element signature="e#3313#3314#0" expanded="true" />
+            <element signature="e#3346#3347#0" expanded="true" />
+            <element signature="e#3396#3397#0" expanded="true" />
+            <element signature="e#3440#3441#0" expanded="true" />
+            <element signature="e#3475#3476#0" expanded="true" />
+            <element signature="e#3508#3509#0" expanded="true" />
+            <element signature="e#3558#3559#0" expanded="true" />
+            <element signature="e#3602#3603#0" expanded="true" />
+            <element signature="e#3635#3636#0" expanded="true" />
+            <element signature="e#3666#3667#0" expanded="true" />
+            <element signature="e#3712#3713#0" expanded="true" />
+            <element signature="e#3752#3753#0" expanded="true" />
           </folding>
         </state>
       </provider>
