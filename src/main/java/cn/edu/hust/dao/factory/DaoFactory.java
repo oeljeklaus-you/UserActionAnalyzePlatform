@@ -1,9 +1,12 @@
 package cn.edu.hust.dao.factory;
 
 import cn.edu.hust.dao.SessionAggrStatDao;
+import cn.edu.hust.dao.SessionRandomExtractDao;
 import cn.edu.hust.dao.TaskDao;
 import cn.edu.hust.dao.impl.SessionAggrStatDaoImpl;
+import cn.edu.hust.dao.impl.SessionRandomExtractDaoImpl;
 import cn.edu.hust.dao.impl.TaskDaoImpl;
+import cn.edu.hust.domain.SessionRandomExtract;
 
 public class DaoFactory {
     /**
@@ -18,5 +21,9 @@ public class DaoFactory {
     public static SessionAggrStatDao getSessionAggrStatDao()
     {
         return new SessionAggrStatDaoImpl();
+    }
+
+    public static SessionRandomExtractDao getSessionRandomExtractDao(){
+        return new SessionRandomExtractDaoImpl();
     }
 }

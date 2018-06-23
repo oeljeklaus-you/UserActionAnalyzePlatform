@@ -5,6 +5,7 @@ import cn.edu.hust.constant.Constants;
 import cn.edu.hust.dao.TaskDao;
 import cn.edu.hust.dao.factory.DaoFactory;
 import cn.edu.hust.domain.SessionAggrStat;
+import cn.edu.hust.domain.SessionRandomExtract;
 import cn.edu.hust.domain.Task;
 import cn.edu.hust.mockData.MockData;
 import cn.edu.hust.util.*;
@@ -16,7 +17,9 @@ import org.apache.spark.SparkContext;
 import org.apache.spark.api.java.JavaPairRDD;
 import org.apache.spark.api.java.JavaRDD;
 import org.apache.spark.api.java.JavaSparkContext;
+import org.apache.spark.api.java.function.FlatMapFunction;
 import org.apache.spark.api.java.function.Function;
+import org.apache.spark.api.java.function.PairFlatMapFunction;
 import org.apache.spark.api.java.function.PairFunction;
 import org.apache.spark.sql.DataFrame;
 import org.apache.spark.sql.Row;
@@ -95,7 +98,7 @@ public class UserVisitAnalyze {
         /**
          * 使用CountByKey算子实现随机抽取功能
          */
-        randomExtractSession(filteredSessionRDD);
+        randomExtractSession(taskId,filteredSessionRDD);
         //计算各个session占比,并写入MySQL
         calculateAndPersist(sessionAggrStatAccumulator.value(),taskId);
         //关闭spark上下文
@@ -361,9 +364,10 @@ public class UserVisitAnalyze {
 
     /**
      * 随机抽取Sesison功能
+     * @param taskId
      * @param filteredSessionRDD
      */
-    private static void randomExtractSession(JavaPairRDD<String, String> filteredSessionRDD) {
+    private static void randomExtractSession(final Long taskId, JavaPairRDD<String, String> filteredSessionRDD) {
         //1.先将过滤Seesion进行映射，映射成为Time,Info的数据格式
         final JavaPairRDD<String,String> mapDataRDD=filteredSessionRDD.mapToPair(new PairFunction<Tuple2<String, String>, String, String>() {
             @Override
@@ -401,7 +405,7 @@ public class UserVisitAnalyze {
 
         Random random=new Random();
         //设计一个新的数据结构，用于存储随机索引,Key是每一天,Map是小时和随机索引列表构成的
-        Map<String,Map<String,List<Long>>> dateRandomExtractMap=new HashMap<String, Map<String, List<Long>>>();
+        final Map<String,Map<String,List<Long>>> dateRandomExtractMap=new HashMap<String, Map<String, List<Long>>>();
 
         for (Map.Entry<String,Map<String,Long>> dateHourCount:dateHourCountMap.entrySet())
         {
@@ -451,6 +455,47 @@ public class UserVisitAnalyze {
             }
         }
 
+
+        //2.将上面计算的RDD进行分组，然后使用FlatMap进行压平，然后判断是否在索引中，如果在，那么将这个信息持久化
+        JavaPairRDD<String,Iterable<String>> time2GroupRDD=mapDataRDD.groupByKey();
+        //将抽取的信息持久化到数据库，并返回SessionIds对，然后和以前的信息Join
+        JavaPairRDD<String,String> sessionIds= time2GroupRDD.flatMapToPair(new PairFlatMapFunction<Tuple2<String,Iterable<String>>, String, String>() {
+            @Override
+            public Iterable<Tuple2<String, String>> call(Tuple2<String, Iterable<String>> tuple2) throws Exception {
+                String dateStr=tuple2._1;
+                String date=dateStr.split("_")[0];
+                String hour=dateStr.split("_")[1];
+                //使用一个List存储sessionId
+                List<Tuple2<String,String>> sessionIds=new ArrayList<Tuple2<String, String>>();
+                List<Long> indexList=dateRandomExtractMap.get(date).get(hour);
+                //使用一个list保存需要持久化到数据库的对象
+                List<SessionRandomExtract> sessionRandomExtractList=new ArrayList<SessionRandomExtract>();
+                int index=0;
+                for (String infos:
+                        tuple2._2) {
+                    if(indexList.contains(index))
+                    {
+                        //构建SessionRandomExtract
+                        SessionRandomExtract sessionRandomExtract=new SessionRandomExtract();
+                        final String sessionId=StringUtils.getFieldFromConcatString(infos,"\\|",Constants.FIELD_SESSIONID);
+                        String startTime=StringUtils.getFieldFromConcatString(infos,"\\|",Constants.FIELD_START_TIME);
+                        String searchKeyWards=StringUtils.getFieldFromConcatString(infos,"\\|",Constants.FIELD_SERACH_KEYWORDS);
+                        String clickCategoryIds=StringUtils.getFieldFromConcatString(infos,"\\|",Constants.FIELD_CLICK_CATEGORYIDS);
+                        sessionRandomExtract.set(taskId,sessionId,startTime,searchKeyWards,clickCategoryIds);
+                        //添加到List中然后持久化到数据库中
+                        sessionRandomExtractList.add(sessionRandomExtract);
+                        sessionIds.add(new Tuple2<String, String>(sessionId,sessionId));
+                    }
+                    index++;
+                }
+                //持久化到数据库
+                DaoFactory.getSessionRandomExtractDao().batchInsert(sessionRandomExtractList);
+                return sessionIds;
+            }
+        });
+
+        //3. 获取session的明细数据保存到数据库
+        
     }
 
     //计算各个范围的占比，并持久化到数据库
