@@ -21,11 +21,12 @@ import org.apache.spark.api.java.function.PairFunction;
 import org.apache.spark.sql.DataFrame;
 import org.apache.spark.sql.Row;
 import org.apache.spark.sql.SQLContext;
+import org.apache.spark.sql.catalyst.expressions.Rand;
 import org.apache.spark.sql.hive.HiveContext;
 import org.joda.time.DateTime;
 import scala.Tuple2;
 
-import java.util.Date;
+import java.util.*;
 
 /**
  * 用户可以查询的范围包含
@@ -89,13 +90,17 @@ public class UserVisitAnalyze {
          *         如果不考虑性能的话，就会导致一个大数据处理程序运行长达数个小时，甚至是数个小时，对用户的体验，简直是
          *         一场灾难。
          */
+        //在使用Accumulutor之前，需要使用Action算子，否则获取的值为空，这里随机计算
         filteredSessionRDD.count();
+        /**
+         * 使用CountByKey算子实现随机抽取功能
+         */
+        randomExtractSession(filteredSessionRDD);
         //计算各个session占比,并写入MySQL
         calculateAndPersist(sessionAggrStatAccumulator.value(),taskId);
         //关闭spark上下文
         context.close();
     }
-
 
 
 
@@ -207,7 +212,7 @@ public class UserVisitAnalyze {
                 String clickCategoryIdsInfo=StringUtils.trimComma(clickCategoryIds.toString());
                 String info=Constants.FIELD_SESSIONID+"="+sessionId+"|"+Constants.FIELD_SERACH_KEYWORDS+"="+searchKeywordsInfo+"|"
                         +Constants.FIELD_CLICK_CATEGORYIDS+"="+clickCategoryIdsInfo+"|"+Constants.FIELD_VISIT_LENGTH+"="+visitLengtth+"|"
-                        +Constants.FIELD_STEP_LENGTH+"="+stepLength;
+                        +Constants.FIELD_STEP_LENGTH+"="+stepLength+"|"+Constants.FIELD_START_TIME+"="+startTime;
                 return new Tuple2<Long, String>(userId,info);
             }
         });
@@ -354,7 +359,101 @@ public class UserVisitAnalyze {
         return filteredSessionRDD;
     }
 
+    /**
+     * 随机抽取Sesison功能
+     * @param filteredSessionRDD
+     */
+    private static void randomExtractSession(JavaPairRDD<String, String> filteredSessionRDD) {
+        //1.先将过滤Seesion进行映射，映射成为Time,Info的数据格式
+        final JavaPairRDD<String,String> mapDataRDD=filteredSessionRDD.mapToPair(new PairFunction<Tuple2<String, String>, String, String>() {
+            @Override
+            public Tuple2<String, String> call(Tuple2<String, String> tuple2) throws Exception {
+                String info=tuple2._2;
+                //获取开始的时间
+                String startTime=StringUtils.getFieldFromConcatString(info,"\\|",Constants.FIELD_START_TIME);
+                String formatStartTime=DateUtils.getDateHour(startTime);
+                return new Tuple2<String, String>(formatStartTime,info);
+            }
+        });
 
+        //计算每一个小时的Session数量
+        Map<String,Object> mapCount=mapDataRDD.countByKey();
+
+        //设计一个新的数据结构Map<String,Map<String,Long>> dateHourCount,日期作为Key，时间和数量作为Map
+        Map<String,Map<String,Long>> dateHourCountMap=new HashMap<String, Map<String, Long>>();
+        //遍历mapCount
+        for (Map.Entry<String,Object> entry:mapCount.entrySet())
+        {
+            String date=entry.getKey().split("_")[0];
+            String hour=entry.getKey().split("_")[1];
+
+            Map<String,Long> hourCount=dateHourCountMap.get(date);
+            if(hourCount==null)
+            {
+                hourCount=new HashMap<String, Long>();
+                dateHourCountMap.put(date,hourCount);
+            }
+            hourCount.put(hour,(Long)entry.getValue());
+        }
+        //将数据按照天数平均
+        int countPerday=100/dateHourCountMap.size();
+        //实现一个随机函数后面将会用到
+
+        Random random=new Random();
+        //设计一个新的数据结构，用于存储随机索引,Key是每一天,Map是小时和随机索引列表构成的
+        Map<String,Map<String,List<Long>>> dateRandomExtractMap=new HashMap<String, Map<String, List<Long>>>();
+
+        for (Map.Entry<String,Map<String,Long>> dateHourCount:dateHourCountMap.entrySet())
+        {
+            //日期
+            String date=dateHourCount.getKey();
+            //每一天个Session个数
+            Long sessionCount=0L;
+            for(Map.Entry<String,Long> hourCountMap:dateHourCount.getValue().entrySet())
+            {
+                sessionCount+=hourCountMap.getValue();
+            }
+
+            //获取每一天随机存储的Map
+            Map<String,List<Long>> dayExtactMap=dateRandomExtractMap.get(date);
+            if(dayExtactMap==null)
+            {
+                dayExtactMap=new HashMap<String, List<Long>>();
+                dateRandomExtractMap.put(date,dayExtactMap);
+            }
+
+            //遍历每一个小时，计算出每一个小时的Session占比和抽取的数量
+
+            for(Map.Entry<String,Long> hourCountMap:dateHourCount.getValue().entrySet())
+            {
+                int extractSize= (int) ((double) hourCountMap.getValue()/sessionCount*countPerday);
+
+                //如果抽离的长度大于被抽取数据的长度，那么抽取的长度就是被抽取长度
+                extractSize= extractSize>hourCountMap.getValue()?  hourCountMap.getValue().intValue():extractSize;
+
+                //获取存储每一个小时的List
+                List<Long> indexList=dayExtactMap.get(hourCountMap.getKey());
+                if(indexList==null)
+                {
+                    indexList=new ArrayList<Long>();
+                    dayExtactMap.put(hourCountMap.getKey(),indexList);
+                }
+
+                //使用随机函数生成随机索引
+                for(int i=0;i<extractSize;i++)
+                {
+                    int index=random.nextInt(hourCountMap.getValue().intValue());
+                    //如果包含，那么一直循环直到不包含为止
+                    while(indexList.contains(Long.valueOf(index)));
+                        index=random.nextInt(hourCountMap.getValue().intValue());
+                    indexList.add(Long.valueOf(index));
+                }
+            }
+        }
+
+    }
+
+    //计算各个范围的占比，并持久化到数据库
     private static void calculateAndPersist(String value,Long taskId) {
         System.out.println(value);
         Long sessionCount=Long.valueOf(StringUtils.getFieldFromConcatString(value,"\\|",Constants.SESSION_COUNT));
@@ -377,7 +476,7 @@ public class UserVisitAnalyze {
         Double step_Length_30_60=Double.valueOf(StringUtils.getFieldFromConcatString(value,"\\|",Constants.STEP_PERIOD_30_60));
         Double step_Length_60=Double.valueOf(StringUtils.getFieldFromConcatString(value,"\\|",Constants.STEP_PERIOD_60));
 
-        //访问时长对应的sesison占比
+        //访问时长对应的sesison占比，保留3位小数
         double visit_Length_1s_3s_ratio=NumberUtils.formatDouble(visit_Length_1s_3s/sessionCount,3);
         double visit_Length_4s_6s_ratio=NumberUtils.formatDouble(visit_Length_4s_6s/sessionCount,3);
         double visit_Length_7s_9s_ratio=NumberUtils.formatDouble(visit_Length_7s_9s/sessionCount,3);
@@ -388,7 +487,7 @@ public class UserVisitAnalyze {
         double visit_Length_10m_30m_ratio=NumberUtils.formatDouble(visit_Length_10m_30m/sessionCount,3);
         double visit_Length_30m_ratio=NumberUtils.formatDouble(visit_Length_30m/sessionCount,3);
 
-        //访问步长对应的session占比
+        //访问步长对应的session占比，保留3位小数
         double step_Length_1_3_ratio= NumberUtils.formatDouble(step_Length_1_3/sessionCount,3);
         double step_Length_4_6_ratio=NumberUtils.formatDouble(step_Length_4_6/sessionCount,3);
         double step_Length_7_9_ratio=NumberUtils.formatDouble(step_Length_7_9/sessionCount,3);

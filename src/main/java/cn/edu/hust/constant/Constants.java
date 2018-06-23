@@ -24,6 +24,7 @@ public class Constants {
     public static final String FIELD_PROFESSIONAL="professional";
     public static final String FIELD_VISIT_LENGTH="visitLength";
     public static final String FIELD_STEP_LENGTH="stepLength";
+    public static final String FIELD_START_TIME="startTime";
 
     /**
      * Spark任务相关厂常量
