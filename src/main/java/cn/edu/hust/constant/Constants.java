@@ -25,6 +25,10 @@ public class Constants {
     public static final String FIELD_VISIT_LENGTH="visitLength";
     public static final String FIELD_STEP_LENGTH="stepLength";
     public static final String FIELD_START_TIME="startTime";
+    public static final String FIELD_CATEGORY_ID="categoryId";
+    public static final String FIELD_CLICK_CATEGORY="categoryId";
+    public static final String FIELD_ORDER_CATEGORY="clickCategory";
+    public static final String FIELD_PAY_CATEGORY="orderCategory";
 
     /**
      * Spark任务相关厂常量
