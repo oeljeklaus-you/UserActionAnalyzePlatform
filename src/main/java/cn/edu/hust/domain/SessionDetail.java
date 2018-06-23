@@ -19,7 +19,7 @@ public class SessionDetail implements Serializable{
     public SessionDetail() {
     }
 
-    public SessionDetail(Long taskId, Long userId, String sessinId, Long pageid, String actionTime, String searchKeyWord, Long clickCategoryId, Long clickProductId, String orderCategoryIds, String orderProductIds, String payCategoryIds, String payProductIds) {
+    public void set(Long taskId, Long userId, String sessinId, Long pageid, String actionTime, String searchKeyWord, Long clickCategoryId, Long clickProductId, String orderCategoryIds, String orderProductIds, String payCategoryIds, String payProductIds) {
         this.taskId = taskId;
         this.userId = userId;
         this.sessinId = sessinId;

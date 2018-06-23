@@ -2,31 +2,27 @@ package cn.edu.hust.session;
 
 import cn.edu.hust.conf.ConfigurationManager;
 import cn.edu.hust.constant.Constants;
+import cn.edu.hust.dao.SessionDetailDao;
 import cn.edu.hust.dao.TaskDao;
 import cn.edu.hust.dao.factory.DaoFactory;
 import cn.edu.hust.domain.SessionAggrStat;
+import cn.edu.hust.domain.SessionDetail;
 import cn.edu.hust.domain.SessionRandomExtract;
 import cn.edu.hust.domain.Task;
 import cn.edu.hust.mockData.MockData;
 import cn.edu.hust.util.*;
 import com.alibaba.fastjson.JSONObject;
 import org.apache.spark.Accumulator;
-import org.apache.spark.AccumulatorParam;
 import org.apache.spark.SparkConf;
 import org.apache.spark.SparkContext;
 import org.apache.spark.api.java.JavaPairRDD;
 import org.apache.spark.api.java.JavaRDD;
 import org.apache.spark.api.java.JavaSparkContext;
-import org.apache.spark.api.java.function.FlatMapFunction;
-import org.apache.spark.api.java.function.Function;
-import org.apache.spark.api.java.function.PairFlatMapFunction;
-import org.apache.spark.api.java.function.PairFunction;
+import org.apache.spark.api.java.function.*;
 import org.apache.spark.sql.DataFrame;
 import org.apache.spark.sql.Row;
 import org.apache.spark.sql.SQLContext;
-import org.apache.spark.sql.catalyst.expressions.Rand;
 import org.apache.spark.sql.hive.HiveContext;
-import org.joda.time.DateTime;
 import scala.Tuple2;
 
 import java.util.*;
@@ -63,6 +59,8 @@ public class UserVisitAnalyze {
 
         //获取指定范围内的Sesssion
         JavaRDD<Row> sessionRangeDate=getActionRDD(sc,jsonObject);
+        //这里增加一个新的方法，主要是映射
+        JavaPairRDD<String,Row> sessionInfoPairRDD=getSessonInfoPairRDD(sessionRangeDate);
         //按照Sesson进行聚合
         JavaPairRDD<String,String> sesssionAggregateInfoRDD=aggregateBySessionId(sc,sessionRangeDate);
 
@@ -98,7 +96,7 @@ public class UserVisitAnalyze {
         /**
          * 使用CountByKey算子实现随机抽取功能
          */
-        randomExtractSession(taskId,filteredSessionRDD);
+        randomExtractSession(taskId,filteredSessionRDD,sessionInfoPairRDD);
         //计算各个session占比,并写入MySQL
         calculateAndPersist(sessionAggrStatAccumulator.value(),taskId);
         //关闭spark上下文
@@ -147,6 +145,26 @@ public class UserVisitAnalyze {
         return df.javaRDD();
     }
 
+    /**
+     * 将数据进行映射成为Pair，键为SessionId，Value为Row
+     * @param sessionRangeDate
+     * @return
+     */
+    private static JavaPairRDD<String,Row> getSessonInfoPairRDD(JavaRDD<Row> sessionRangeDate) {
+        return sessionRangeDate.mapToPair(new PairFunction<Row, String, Row>() {
+            @Override
+            public Tuple2<String, Row> call(Row row) throws Exception {
+                return new Tuple2<String, Row>(row.getString(2),row);
+            }
+        });
+    }
+
+    /**
+     * session粒度的聚合
+     * @param sc
+     * @param sessionRangeDate
+     * @return
+     */
     private static JavaPairRDD<String,String> aggregateBySessionId(SQLContext sc, JavaRDD<Row> sessionRangeDate) {
         /**
          * 先将数据映射成map格式
@@ -366,8 +384,9 @@ public class UserVisitAnalyze {
      * 随机抽取Sesison功能
      * @param taskId
      * @param filteredSessionRDD
+     * @param sessionInfoPairRDD
      */
-    private static void randomExtractSession(final Long taskId, JavaPairRDD<String, String> filteredSessionRDD) {
+    private static void randomExtractSession(final Long taskId, JavaPairRDD<String, String> filteredSessionRDD, JavaPairRDD<String, Row> sessionInfoPairRDD) {
         //1.先将过滤Seesion进行映射，映射成为Time,Info的数据格式
         final JavaPairRDD<String,String> mapDataRDD=filteredSessionRDD.mapToPair(new PairFunction<Tuple2<String, String>, String, String>() {
             @Override
@@ -495,7 +514,33 @@ public class UserVisitAnalyze {
         });
 
         //3. 获取session的明细数据保存到数据库
-        
+        JavaPairRDD<String,Tuple2<String,Row>> sessionDetailRDD= sessionIds.join(sessionInfoPairRDD);
+        final SessionDetailDao sessionDetailDao=DaoFactory.getSessionDetailDao();
+        sessionDetailRDD.foreachPartition(new VoidFunction<Iterator<Tuple2<String, Tuple2<String, Row>>>>() {
+            @Override
+            public void call(Iterator<Tuple2<String, Tuple2<String, Row>>> tuple2Iterator) throws Exception {
+                while(tuple2Iterator.hasNext())
+                {
+                    Tuple2<String, Tuple2<String, Row>> tuple2=tuple2Iterator.next();
+                    Row row=tuple2._2._2;
+                    String sessionId=tuple2._1;
+                    Long userId=row.getLong(1);
+                    Long pageId=row.getLong(3);
+                    String actionTime=row.getString(4);
+                    String searchKeyWard=row.getString(5);
+                    Long clickCategoryId=row.getLong(6);
+                    Long clickProducetId=row.getLong(7);
+                    String orderCategoryId=row.getString(8);
+                    String orderProducetId=row.getString(9);
+                    String payCategoryId=row.getString(10);
+                    String payProducetId=row.getString(11);
+                    SessionDetail sessionDetail=new SessionDetail();
+                    sessionDetail.set(taskId,userId,sessionId,pageId,actionTime,searchKeyWard,clickCategoryId,clickProducetId,orderCategoryId,orderProducetId,payCategoryId,payProducetId);
+                    sessionDetailDao.insert(sessionDetail);
+                }
+            }
+        });
+
     }
 
     //计算各个范围的占比，并持久化到数据库
