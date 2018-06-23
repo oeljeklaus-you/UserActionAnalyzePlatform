@@ -1,13 +1,14 @@
 package cn.edu.hust.session;
 
+
 import scala.math.Ordered;
 
-public class CategorySortKey implements Ordered<CategorySortKey> {
+public class CategorySortKey implements Ordered<CategorySortKey>, java.io.Serializable {
 
     private Long clickCount;
     private Long orderCount;
     private Long payCount;
-    
+
     @Override
     public int compare(CategorySortKey categorySortKey) {
         if(clickCount-categorySortKey.getClickCount()!=0)
@@ -107,6 +108,12 @@ public class CategorySortKey implements Ordered<CategorySortKey> {
     }
 
     public void setPayCount(Long payCount) {
+        this.payCount = payCount;
+    }
+
+    public void set(Long clickCount, Long orderCount, Long payCount) {
+        this.clickCount = clickCount;
+        this.orderCount = orderCount;
         this.payCount = payCount;
     }
 }

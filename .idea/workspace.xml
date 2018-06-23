@@ -2,8 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a7505764-040b-48e2-b2fc-8c5b579e595f" name="Default" comment="">
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/cn/edu/hust/session/CategorySortKey.java" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/cn/edu/hust/dao/Top10CategoryDao.java" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/cn/edu/hust/dao/impl/Top10CategoryDaoImpl.java" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/cn/edu/hust/domain/Top10Category.java" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cn/edu/hust/dao/SessionAggrStatDao.java" afterPath="$PROJECT_DIR$/src/main/java/cn/edu/hust/dao/SessionAggrStatDao.java" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cn/edu/hust/dao/factory/DaoFactory.java" afterPath="$PROJECT_DIR$/src/main/java/cn/edu/hust/dao/factory/DaoFactory.java" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cn/edu/hust/dao/impl/SessionAggrStatDaoImpl.java" afterPath="$PROJECT_DIR$/src/main/java/cn/edu/hust/dao/impl/SessionAggrStatDaoImpl.java" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cn/edu/hust/session/CategorySortKey.java" afterPath="$PROJECT_DIR$/src/main/java/cn/edu/hust/session/CategorySortKey.java" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cn/edu/hust/session/UserVisitAnalyze.java" afterPath="$PROJECT_DIR$/src/main/java/cn/edu/hust/session/UserVisitAnalyze.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -16,90 +23,169 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="UserVisitAnalyze.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="UserVisitAnalyze.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/cn/edu/hust/session/UserVisitAnalyze.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="465">
-              <caret line="660" column="0" lean-forward="true" selection-start-line="660" selection-start-column="0" selection-end-line="660" selection-end-column="0" />
+            <state relative-caret-position="353">
+              <caret line="596" column="74" lean-forward="false" selection-start-line="596" selection-start-column="74" selection-end-line="596" selection-end-column="74" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#21341#21363#0" expanded="true" />
-                <element signature="e#23194#23209#0" expanded="true" />
-                <element signature="e#29213#29545#0" expanded="true" />
-                <element signature="e#29544#29545#0" expanded="true" />
-                <element signature="e#29663#30909#0" expanded="true" />
-                <element signature="e#29969#29989#0" expanded="true" />
-                <element signature="e#30908#30909#0" expanded="true" />
-                <element signature="e#32108#32915#0" expanded="true" />
-                <element signature="e#32914#32915#0" expanded="true" />
-                <element signature="e#33002#33819#0" expanded="true" />
-                <element signature="e#33818#33819#0" expanded="true" />
-                <element signature="e#33904#34719#0" expanded="true" />
-                <element signature="e#34718#34719#0" expanded="true" />
-                <element signature="e#34932#35316#0" expanded="true" />
-                <element signature="e#35315#35316#0" expanded="true" />
-                <element signature="e#35413#36117#0" expanded="true" />
-                <element signature="e#35675#35695#0" expanded="true" />
-                <element signature="e#36116#36117#0" expanded="true" />
-                <element signature="e#36215#36406#0" expanded="true" />
-                <element signature="e#36405#36406#0" expanded="true" />
-                <element signature="e#36637#37020#0" expanded="true" />
-                <element signature="e#37019#37020#0" expanded="true" />
-                <element signature="e#37121#37831#0" expanded="true" />
-                <element signature="e#37383#37403#0" expanded="true" />
-                <element signature="e#37830#37831#0" expanded="true" />
-                <element signature="e#37933#38124#0" expanded="true" />
-                <element signature="e#38123#38124#0" expanded="true" />
-                <element signature="e#38358#38711#0" expanded="true" />
-                <element signature="e#38710#38711#0" expanded="true" />
-                <element signature="e#38808#39114#0" expanded="true" />
-                <element signature="e#39113#39114#0" expanded="true" />
-                <element signature="e#39216#39407#0" expanded="true" />
-                <element signature="e#39406#39407#0" expanded="true" />
+                <element signature="e#21213#21235#0" expanded="true" />
+                <element signature="e#23066#23081#0" expanded="true" />
+                <element signature="e#28680#28697#0" expanded="true" />
+                <element signature="e#29261#29593#0" expanded="true" />
+                <element signature="e#29592#29593#0" expanded="true" />
+                <element signature="e#29711#31113#0" expanded="true" />
+                <element signature="e#30017#30037#0" expanded="true" />
+                <element signature="e#31112#31113#0" expanded="true" />
+                <element signature="e#31862#32728#0" expanded="true" />
+                <element signature="e#32727#32728#0" expanded="true" />
+                <element signature="e#32999#33014#0" expanded="true" />
+                <element signature="e#34526#35330#0" expanded="true" />
+                <element signature="e#35329#35330#0" expanded="true" />
+                <element signature="e#35417#36234#0" expanded="true" />
+                <element signature="e#36233#36234#0" expanded="true" />
+                <element signature="e#36319#37134#0" expanded="true" />
+                <element signature="e#37133#37134#0" expanded="true" />
+                <element signature="e#37347#37731#0" expanded="true" />
+                <element signature="e#37730#37731#0" expanded="true" />
+                <element signature="e#37828#38532#0" expanded="true" />
+                <element signature="e#38090#38110#0" expanded="true" />
+                <element signature="e#38531#38532#0" expanded="true" />
+                <element signature="e#38630#38821#0" expanded="true" />
+                <element signature="e#38820#38821#0" expanded="true" />
+                <element signature="e#39052#39435#0" expanded="true" />
+                <element signature="e#39434#39435#0" expanded="true" />
+                <element signature="e#39536#40246#0" expanded="true" />
+                <element signature="e#39798#39818#0" expanded="true" />
+                <element signature="e#40245#40246#0" expanded="true" />
+                <element signature="e#40348#40539#0" expanded="true" />
+                <element signature="e#40538#40539#0" expanded="true" />
+                <element signature="e#40773#41077#0" expanded="true" />
+                <element signature="e#41076#41077#0" expanded="true" />
+                <element signature="e#41174#41480#0" expanded="true" />
+                <element signature="e#41479#41480#0" expanded="true" />
+                <element signature="e#41582#41773#0" expanded="true" />
+                <element signature="e#41772#41773#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="CategorySortKey.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/java/cn/edu/hust/session/CategorySortKey.java">
+      <file leaf-file-name="SessionAggrStat.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/cn/edu/hust/domain/SessionAggrStat.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="171">
-              <caret line="9" column="4" lean-forward="false" selection-start-line="9" selection-start-column="4" selection-end-line="9" selection-end-column="4" />
+            <state relative-caret-position="443">
+              <caret line="114" column="27" lean-forward="false" selection-start-line="114" selection-start-column="27" selection-end-line="114" selection-end-column="27" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="SessionAggrStatDaoImpl.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/cn/edu/hust/dao/impl/SessionAggrStatDaoImpl.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="346">
+              <caret line="40" column="60" lean-forward="false" selection-start-line="40" selection-start-column="60" selection-end-line="40" selection-end-column="60" />
               <folding>
-                <element signature="e#3313#3314#0" expanded="true" />
-                <element signature="e#3346#3347#0" expanded="true" />
-                <element signature="e#3396#3397#0" expanded="true" />
-                <element signature="e#3440#3441#0" expanded="true" />
-                <element signature="e#3475#3476#0" expanded="true" />
-                <element signature="e#3508#3509#0" expanded="true" />
-                <element signature="e#3558#3559#0" expanded="true" />
-                <element signature="e#3602#3603#0" expanded="true" />
-                <element signature="e#3635#3636#0" expanded="true" />
-                <element signature="e#3666#3667#0" expanded="true" />
-                <element signature="e#3712#3713#0" expanded="true" />
-                <element signature="e#3752#3753#0" expanded="true" />
+                <element signature="e#1531#1541#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="MockData.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/cn/edu/hust/mockData/MockData.java">
+      <file leaf-file-name="SessionAggrStatAccumulator.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/cn/edu/hust/session/SessionAggrStatAccumulator.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="916">
-              <caret line="80" column="12" lean-forward="false" selection-start-line="80" selection-start-column="12" selection-end-line="80" selection-end-column="12" />
+            <state relative-caret-position="491">
+              <caret line="41" column="46" lean-forward="true" selection-start-line="41" selection-start-column="46" selection-end-line="41" selection-end-column="46" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Constants.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/cn/edu/hust/constant/Constants.java">
+      <file leaf-file-name="SessionAggrStatDao.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/cn/edu/hust/dao/SessionAggrStatDao.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="344">
-              <caret line="30" column="64" lean-forward="false" selection-start-line="30" selection-start-column="64" selection-end-line="30" selection-end-column="64" />
+            <state relative-caret-position="114">
+              <caret line="9" column="42" lean-forward="false" selection-start-line="9" selection-start-column="42" selection-end-line="9" selection-end-column="42" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="JDBCHelper.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/cn/edu/hust/jdbc/JDBCHelper.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="176">
+              <caret line="169" column="0" lean-forward="false" selection-start-line="169" selection-start-column="0" selection-end-line="169" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="DaoFactory.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/cn/edu/hust/dao/factory/DaoFactory.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="323">
+              <caret line="31" column="92" lean-forward="false" selection-start-line="31" selection-start-column="92" selection-end-line="31" selection-end-column="92" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Top10Category.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/cn/edu/hust/domain/Top10Category.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="38">
+              <caret line="2" column="27" lean-forward="false" selection-start-line="2" selection-start-column="27" selection-end-line="2" selection-end-column="27" />
+              <folding>
+                <element signature="e#549#550#0" expanded="true" />
+                <element signature="e#578#579#0" expanded="true" />
+                <element signature="e#620#621#0" expanded="true" />
+                <element signature="e#656#657#0" expanded="true" />
+                <element signature="e#691#692#0" expanded="true" />
+                <element signature="e#724#725#0" expanded="true" />
+                <element signature="e#774#775#0" expanded="true" />
+                <element signature="e#818#819#0" expanded="true" />
+                <element signature="e#853#854#0" expanded="true" />
+                <element signature="e#886#887#0" expanded="true" />
+                <element signature="e#936#937#0" expanded="true" />
+                <element signature="e#980#981#0" expanded="true" />
+                <element signature="e#1015#1016#0" expanded="true" />
+                <element signature="e#1048#1049#0" expanded="true" />
+                <element signature="e#1098#1099#0" expanded="true" />
+                <element signature="e#1142#1143#0" expanded="true" />
+                <element signature="e#1175#1176#0" expanded="true" />
+                <element signature="e#1206#1207#0" expanded="true" />
+                <element signature="e#1252#1253#0" expanded="true" />
+                <element signature="e#1292#1293#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Top10CategoryDao.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/cn/edu/hust/dao/Top10CategoryDao.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="152">
+              <caret line="8" column="58" lean-forward="false" selection-start-line="8" selection-start-column="58" selection-end-line="8" selection-end-column="58" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Top10CategoryDaoImpl.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/cn/edu/hust/dao/impl/Top10CategoryDaoImpl.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="240">
+              <caret line="27" column="76" lean-forward="false" selection-start-line="27" selection-start-column="76" selection-end-line="27" selection-end-column="76" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#919#929#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -145,7 +231,6 @@
         <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/README.md" />
         <option value="$PROJECT_DIR$/src/main/java/cn/edu/hust/domain/SessionAggrStat.java" />
-        <option value="$PROJECT_DIR$/src/main/java/cn/edu/hust/dao/impl/SessionAggrStatDaoImpl.java" />
         <option value="$PROJECT_DIR$/src/test/java/cn/edu/hust/dao/SessionAggrDao.java" />
         <option value="$PROJECT_DIR$/src/main/java/cn/edu/hust/util/DateUtils.java" />
         <option value="$PROJECT_DIR$/src/main/java/cn/edu/hust/session/SessionAggrStatAccumulator.java" />
@@ -156,17 +241,21 @@
         <option value="$PROJECT_DIR$/src/main/java/cn/edu/hust/dao/impl/SessionRandomExtractDaoImpl.java" />
         <option value="$PROJECT_DIR$/src/main/java/cn/edu/hust/dao/impl/SessionDetailDao.java" />
         <option value="$PROJECT_DIR$/src/main/java/cn/edu/hust/domain/SessionDetail.java" />
-        <option value="$PROJECT_DIR$/src/main/java/cn/edu/hust/dao/factory/DaoFactory.java" />
         <option value="$PROJECT_DIR$/src/test/java/cn/edu/hust/dao/SessionDetailTest.java" />
         <option value="$PROJECT_DIR$/src/test/java/cn/edu/hust/dao/SessionRandomExtractDaoTest.java" />
         <option value="$PROJECT_DIR$/src/main/java/cn/edu/hust/dao/SessionDetailDao.java" />
         <option value="$PROJECT_DIR$/src/main/java/cn/edu/hust/dao/impl/SessionDetailDaoImpl.java" />
         <option value="$PROJECT_DIR$/src/main/resources/conf.properties" />
-        <option value="$PROJECT_DIR$/src/main/java/cn/edu/hust/dao/SessionAggrStatDao.java" />
         <option value="$PROJECT_DIR$/src/main/java/cn/edu/hust/constant/Constants.java" />
-        <option value="$PROJECT_DIR$/src/main/java/cn/edu/hust/session/UserVisitAnalyze.java" />
         <option value="$PROJECT_DIR$/src/main/java/cn/edu/hust/session/CategorySort.java" />
+        <option value="$PROJECT_DIR$/src/main/java/cn/edu/hust/domain/Top10Category.java" />
+        <option value="$PROJECT_DIR$/src/main/java/cn/edu/hust/dao/Top10CategoryDao.java" />
+        <option value="$PROJECT_DIR$/src/main/java/cn/edu/hust/dao/factory/DaoFactory.java" />
         <option value="$PROJECT_DIR$/src/main/java/cn/edu/hust/session/CategorySortKey.java" />
+        <option value="$PROJECT_DIR$/src/main/java/cn/edu/hust/dao/impl/Top10CategoryDaoImpl.java" />
+        <option value="$PROJECT_DIR$/src/main/java/cn/edu/hust/dao/SessionAggrStatDao.java" />
+        <option value="$PROJECT_DIR$/src/main/java/cn/edu/hust/dao/impl/SessionAggrStatDaoImpl.java" />
+        <option value="$PROJECT_DIR$/src/main/java/cn/edu/hust/session/UserVisitAnalyze.java" />
       </list>
     </option>
   </component>
@@ -271,6 +360,44 @@
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="hust" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="UserActionAnalyzePlatform" type="b2602c69:ProjectViewProjectNode" />
+              <item name="UserActionAnalyzePlatform" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="hust" type="462c0819:PsiDirectoryNode" />
+              <item name="dao" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="UserActionAnalyzePlatform" type="b2602c69:ProjectViewProjectNode" />
+              <item name="UserActionAnalyzePlatform" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="hust" type="462c0819:PsiDirectoryNode" />
+              <item name="dao" type="462c0819:PsiDirectoryNode" />
+              <item name="factory" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="UserActionAnalyzePlatform" type="b2602c69:ProjectViewProjectNode" />
+              <item name="UserActionAnalyzePlatform" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="hust" type="462c0819:PsiDirectoryNode" />
+              <item name="dao" type="462c0819:PsiDirectoryNode" />
+              <item name="impl" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="UserActionAnalyzePlatform" type="b2602c69:ProjectViewProjectNode" />
+              <item name="UserActionAnalyzePlatform" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="hust" type="462c0819:PsiDirectoryNode" />
+              <item name="domain" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="UserActionAnalyzePlatform" type="b2602c69:ProjectViewProjectNode" />
@@ -594,7 +721,7 @@
       <workItem from="1529590333052" duration="2564000" />
       <workItem from="1529630336674" duration="15098000" />
       <workItem from="1529666057370" duration="13151000" />
-      <workItem from="1529717692529" duration="27033000" />
+      <workItem from="1529717692529" duration="29785000" />
     </task>
     <task id="LOCAL-00001" summary="1.环境搭建完成&#10;2.相关的工具类编写完成&#10;3.配置文件管理类编写完成">
       <created>1529592741848</created>
@@ -646,7 +773,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="58880000" />
+    <option name="totallyTimeSpent" value="61632000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
@@ -662,7 +789,7 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32889965" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32904884" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32648125" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32648125" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -750,32 +877,11 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="27" />
+      <option name="time" value="30" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/.gitattributes">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/cn/edu/hust/conf/ConfigurationManagerTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="133">
-          <caret line="7" column="16" lean-forward="false" selection-start-line="7" selection-start-column="16" selection-end-line="7" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_144.jdk/Contents/Home/src.zip!/java/util/concurrent/atomic/AtomicInteger.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="372">
-          <caret line="157" column="8" lean-forward="false" selection-start-line="157" selection-start-column="8" selection-end-line="157" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_144.jdk/Contents/Home/src.zip!/java/util/concurrent/LinkedBlockingQueue.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="250">
@@ -926,87 +1032,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/cn/edu/hust/dao/impl/SessionAggrStatDaoImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="342">
-          <caret line="18" column="58" lean-forward="false" selection-start-line="18" selection-start-column="58" selection-end-line="18" selection-end-column="58" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/cn/edu/hust/domain/SessionAggrStat.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="443">
-          <caret line="114" column="27" lean-forward="false" selection-start-line="114" selection-start-column="27" selection-end-line="114" selection-end-column="27" />
-          <folding>
-            <element signature="e#2125#2126#0" expanded="false" />
-            <element signature="e#2154#2155#0" expanded="false" />
-            <element signature="e#2196#2197#0" expanded="false" />
-            <element signature="e#2232#2233#0" expanded="false" />
-            <element signature="e#2269#2270#0" expanded="false" />
-            <element signature="e#2304#2305#0" expanded="false" />
-            <element signature="e#2358#2359#0" expanded="false" />
-            <element signature="e#2401#2402#0" expanded="false" />
-            <element signature="e#2446#2447#0" expanded="false" />
-            <element signature="e#2487#2488#0" expanded="false" />
-            <element signature="e#2555#2556#0" expanded="false" />
-            <element signature="e#2615#2616#0" expanded="false" />
-            <element signature="e#2660#2661#0" expanded="false" />
-            <element signature="e#2701#2702#0" expanded="false" />
-            <element signature="e#2769#2770#0" expanded="false" />
-            <element signature="e#2829#2830#0" expanded="false" />
-            <element signature="e#2874#2875#0" expanded="false" />
-            <element signature="e#2915#2916#0" expanded="false" />
-            <element signature="e#2983#2984#0" expanded="false" />
-            <element signature="e#3043#3044#0" expanded="false" />
-            <element signature="e#3090#3091#0" expanded="false" />
-            <element signature="e#3133#3134#0" expanded="false" />
-            <element signature="e#3316#3317#0" expanded="false" />
-            <element signature="e#3359#3360#0" expanded="false" />
-            <element signature="e#3540#3541#0" expanded="false" />
-            <element signature="e#3581#3582#0" expanded="false" />
-            <element signature="e#3649#3650#0" expanded="false" />
-            <element signature="e#3709#3710#0" expanded="false" />
-            <element signature="e#3755#3756#0" expanded="false" />
-            <element signature="e#3797#3798#0" expanded="false" />
-            <element signature="e#3865#3866#0" expanded="false" />
-            <element signature="e#3926#3927#0" expanded="false" />
-            <element signature="e#3973#3974#0" expanded="false" />
-            <element signature="e#4016#4017#0" expanded="false" />
-            <element signature="e#4195#4196#0" expanded="false" />
-            <element signature="e#4234#4235#0" expanded="false" />
-            <element signature="e#4298#4299#0" expanded="false" />
-            <element signature="e#4354#4355#0" expanded="false" />
-            <element signature="e#4396#4397#0" expanded="false" />
-            <element signature="e#4434#4435#0" expanded="false" />
-            <element signature="e#4496#4497#0" expanded="false" />
-            <element signature="e#4550#4551#0" expanded="false" />
-            <element signature="e#4592#4593#0" expanded="false" />
-            <element signature="e#4630#4631#0" expanded="false" />
-            <element signature="e#4692#4693#0" expanded="false" />
-            <element signature="e#4746#4747#0" expanded="false" />
-            <element signature="e#4788#4789#0" expanded="false" />
-            <element signature="e#4826#4827#0" expanded="false" />
-            <element signature="e#4888#4889#0" expanded="false" />
-            <element signature="e#4942#4943#0" expanded="false" />
-            <element signature="e#4986#4987#0" expanded="false" />
-            <element signature="e#5026#5027#0" expanded="false" />
-            <element signature="e#5092#5093#0" expanded="false" />
-            <element signature="e#5150#5151#0" expanded="false" />
-            <element signature="e#5194#5195#0" expanded="false" />
-            <element signature="e#5234#5235#0" expanded="false" />
-            <element signature="e#5300#5301#0" expanded="false" />
-            <element signature="e#5358#5359#0" expanded="false" />
-            <element signature="e#5399#5400#0" expanded="false" />
-            <element signature="e#5436#5437#0" expanded="false" />
-            <element signature="e#5496#5497#0" expanded="false" />
-            <element signature="e#5548#5549#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$MAVEN_REPOSITORY$/org/apache/spark/spark-catalyst_2.10/1.5.1/spark-catalyst_2.10-1.5.1.jar!/org/apache/spark/sql/Row$class.class">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="135">
@@ -1154,19 +1179,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/cn/edu/hust/dao/factory/DaoFactory.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="361">
-          <caret line="34" column="42" lean-forward="false" selection-start-line="34" selection-start-column="42" selection-end-line="34" selection-end-column="42" />
-          <folding>
-            <element signature="e#834#835#0" expanded="false" />
-            <element signature="e#890#891#0" expanded="false" />
-            <element signature="e#955#956#0" expanded="false" />
-            <element signature="e#1004#1005#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$MAVEN_REPOSITORY$/org/apache/spark/spark-core_2.10/1.5.1/spark-core_2.10-1.5.1.jar!/org/apache/spark/api/java/AbstractJavaRDDLike.class">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="208">
@@ -1283,24 +1295,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/cn/edu/hust/dao/SessionAggrStatDao.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="171">
-          <caret line="9" column="0" lean-forward="true" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/cn/edu/hust/jdbc/JDBCHelper.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="494">
-          <caret line="32" column="11" lean-forward="true" selection-start-line="32" selection-start-column="11" selection-end-line="32" selection-end-column="11" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/cn/edu/hust/dao/SessionRandomExtractDaoTest.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="209">
@@ -1323,10 +1317,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/cn/edu/hust/session/SessionAggrStatAccumulator.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/cn/edu/hust/constant/Constants.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="495">
-          <caret line="41" column="46" lean-forward="true" selection-start-line="41" selection-start-column="46" selection-end-line="41" selection-end-column="46" />
+        <state relative-caret-position="551">
+          <caret line="29" column="51" lean-forward="false" selection-start-line="29" selection-start-column="31" selection-end-line="29" selection-end-column="51" />
           <folding />
         </state>
       </provider>
@@ -1339,74 +1333,170 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/cn/edu/hust/constant/Constants.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/cn/edu/hust/dao/factory/DaoFactory.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="344">
-          <caret line="30" column="64" lean-forward="false" selection-start-line="30" selection-start-column="64" selection-end-line="30" selection-end-column="64" />
+        <state relative-caret-position="323">
+          <caret line="31" column="92" lean-forward="false" selection-start-line="31" selection-start-column="92" selection-end-line="31" selection-end-column="92" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/cn/edu/hust/session/UserVisitAnalyze.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/cn/edu/hust/dao/Top10CategoryDao.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="465">
-          <caret line="660" column="0" lean-forward="true" selection-start-line="660" selection-start-column="0" selection-end-line="660" selection-end-column="0" />
+        <state relative-caret-position="152">
+          <caret line="8" column="58" lean-forward="false" selection-start-line="8" selection-start-column="58" selection-end-line="8" selection-end-column="58" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#21341#21363#0" expanded="true" />
-            <element signature="e#23194#23209#0" expanded="true" />
-            <element signature="e#29213#29545#0" expanded="true" />
-            <element signature="e#29544#29545#0" expanded="true" />
-            <element signature="e#29663#30909#0" expanded="true" />
-            <element signature="e#29969#29989#0" expanded="true" />
-            <element signature="e#30908#30909#0" expanded="true" />
-            <element signature="e#32108#32915#0" expanded="true" />
-            <element signature="e#32914#32915#0" expanded="true" />
-            <element signature="e#33002#33819#0" expanded="true" />
-            <element signature="e#33818#33819#0" expanded="true" />
-            <element signature="e#33904#34719#0" expanded="true" />
-            <element signature="e#34718#34719#0" expanded="true" />
-            <element signature="e#34932#35316#0" expanded="true" />
-            <element signature="e#35315#35316#0" expanded="true" />
-            <element signature="e#35413#36117#0" expanded="true" />
-            <element signature="e#35675#35695#0" expanded="true" />
-            <element signature="e#36116#36117#0" expanded="true" />
-            <element signature="e#36215#36406#0" expanded="true" />
-            <element signature="e#36405#36406#0" expanded="true" />
-            <element signature="e#36637#37020#0" expanded="true" />
-            <element signature="e#37019#37020#0" expanded="true" />
-            <element signature="e#37121#37831#0" expanded="true" />
-            <element signature="e#37383#37403#0" expanded="true" />
-            <element signature="e#37830#37831#0" expanded="true" />
-            <element signature="e#37933#38124#0" expanded="true" />
-            <element signature="e#38123#38124#0" expanded="true" />
-            <element signature="e#38358#38711#0" expanded="true" />
-            <element signature="e#38710#38711#0" expanded="true" />
-            <element signature="e#38808#39114#0" expanded="true" />
-            <element signature="e#39113#39114#0" expanded="true" />
-            <element signature="e#39216#39407#0" expanded="true" />
-            <element signature="e#39406#39407#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/cn/edu/hust/domain/Top10Category.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="38">
+          <caret line="2" column="27" lean-forward="false" selection-start-line="2" selection-start-column="27" selection-end-line="2" selection-end-column="27" />
+          <folding>
+            <element signature="e#549#550#0" expanded="true" />
+            <element signature="e#578#579#0" expanded="true" />
+            <element signature="e#620#621#0" expanded="true" />
+            <element signature="e#656#657#0" expanded="true" />
+            <element signature="e#691#692#0" expanded="true" />
+            <element signature="e#724#725#0" expanded="true" />
+            <element signature="e#774#775#0" expanded="true" />
+            <element signature="e#818#819#0" expanded="true" />
+            <element signature="e#853#854#0" expanded="true" />
+            <element signature="e#886#887#0" expanded="true" />
+            <element signature="e#936#937#0" expanded="true" />
+            <element signature="e#980#981#0" expanded="true" />
+            <element signature="e#1015#1016#0" expanded="true" />
+            <element signature="e#1048#1049#0" expanded="true" />
+            <element signature="e#1098#1099#0" expanded="true" />
+            <element signature="e#1142#1143#0" expanded="true" />
+            <element signature="e#1175#1176#0" expanded="true" />
+            <element signature="e#1206#1207#0" expanded="true" />
+            <element signature="e#1252#1253#0" expanded="true" />
+            <element signature="e#1292#1293#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/cn/edu/hust/session/CategorySortKey.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="171">
-          <caret line="9" column="4" lean-forward="false" selection-start-line="9" selection-start-column="4" selection-end-line="9" selection-end-column="4" />
+        <state relative-caret-position="19">
+          <caret line="2" column="0" lean-forward="true" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
           <folding>
-            <element signature="e#3313#3314#0" expanded="true" />
-            <element signature="e#3346#3347#0" expanded="true" />
-            <element signature="e#3396#3397#0" expanded="true" />
-            <element signature="e#3440#3441#0" expanded="true" />
-            <element signature="e#3475#3476#0" expanded="true" />
-            <element signature="e#3508#3509#0" expanded="true" />
-            <element signature="e#3558#3559#0" expanded="true" />
-            <element signature="e#3602#3603#0" expanded="true" />
-            <element signature="e#3635#3636#0" expanded="true" />
-            <element signature="e#3666#3667#0" expanded="true" />
-            <element signature="e#3712#3713#0" expanded="true" />
-            <element signature="e#3752#3753#0" expanded="true" />
+            <element signature="e#3332#3333#0" expanded="true" />
+            <element signature="e#3365#3366#0" expanded="true" />
+            <element signature="e#3415#3416#0" expanded="true" />
+            <element signature="e#3459#3460#0" expanded="true" />
+            <element signature="e#3494#3495#0" expanded="true" />
+            <element signature="e#3527#3528#0" expanded="true" />
+            <element signature="e#3577#3578#0" expanded="true" />
+            <element signature="e#3621#3622#0" expanded="true" />
+            <element signature="e#3654#3655#0" expanded="true" />
+            <element signature="e#3685#3686#0" expanded="true" />
+            <element signature="e#3731#3732#0" expanded="true" />
+            <element signature="e#3771#3772#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/cn/edu/hust/jdbc/JDBCHelper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="176">
+          <caret line="169" column="0" lean-forward="false" selection-start-line="169" selection-start-column="0" selection-end-line="169" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/cn/edu/hust/dao/impl/Top10CategoryDaoImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="27" column="76" lean-forward="false" selection-start-line="27" selection-start-column="76" selection-end-line="27" selection-end-column="76" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#919#929#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/cn/edu/hust/domain/SessionAggrStat.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="443">
+          <caret line="114" column="27" lean-forward="false" selection-start-line="114" selection-start-column="27" selection-end-line="114" selection-end-column="27" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/cn/edu/hust/session/SessionAggrStatAccumulator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="491">
+          <caret line="41" column="46" lean-forward="true" selection-start-line="41" selection-start-column="46" selection-end-line="41" selection-end-column="46" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/cn/edu/hust/dao/SessionAggrStatDao.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="114">
+          <caret line="9" column="42" lean-forward="false" selection-start-line="9" selection-start-column="42" selection-end-line="9" selection-end-column="42" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/cn/edu/hust/dao/impl/SessionAggrStatDaoImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="346">
+          <caret line="40" column="60" lean-forward="false" selection-start-line="40" selection-start-column="60" selection-end-line="40" selection-end-column="60" />
+          <folding>
+            <element signature="e#1531#1541#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/cn/edu/hust/session/UserVisitAnalyze.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="353">
+          <caret line="596" column="74" lean-forward="false" selection-start-line="596" selection-start-column="74" selection-end-line="596" selection-end-column="74" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#21213#21235#0" expanded="true" />
+            <element signature="e#23066#23081#0" expanded="true" />
+            <element signature="e#28680#28697#0" expanded="true" />
+            <element signature="e#29261#29593#0" expanded="true" />
+            <element signature="e#29592#29593#0" expanded="true" />
+            <element signature="e#29711#31113#0" expanded="true" />
+            <element signature="e#30017#30037#0" expanded="true" />
+            <element signature="e#31112#31113#0" expanded="true" />
+            <element signature="e#31862#32728#0" expanded="true" />
+            <element signature="e#32727#32728#0" expanded="true" />
+            <element signature="e#32999#33014#0" expanded="true" />
+            <element signature="e#34526#35330#0" expanded="true" />
+            <element signature="e#35329#35330#0" expanded="true" />
+            <element signature="e#35417#36234#0" expanded="true" />
+            <element signature="e#36233#36234#0" expanded="true" />
+            <element signature="e#36319#37134#0" expanded="true" />
+            <element signature="e#37133#37134#0" expanded="true" />
+            <element signature="e#37347#37731#0" expanded="true" />
+            <element signature="e#37730#37731#0" expanded="true" />
+            <element signature="e#37828#38532#0" expanded="true" />
+            <element signature="e#38090#38110#0" expanded="true" />
+            <element signature="e#38531#38532#0" expanded="true" />
+            <element signature="e#38630#38821#0" expanded="true" />
+            <element signature="e#38820#38821#0" expanded="true" />
+            <element signature="e#39052#39435#0" expanded="true" />
+            <element signature="e#39434#39435#0" expanded="true" />
+            <element signature="e#39536#40246#0" expanded="true" />
+            <element signature="e#39798#39818#0" expanded="true" />
+            <element signature="e#40245#40246#0" expanded="true" />
+            <element signature="e#40348#40539#0" expanded="true" />
+            <element signature="e#40538#40539#0" expanded="true" />
+            <element signature="e#40773#41077#0" expanded="true" />
+            <element signature="e#41076#41077#0" expanded="true" />
+            <element signature="e#41174#41480#0" expanded="true" />
+            <element signature="e#41479#41480#0" expanded="true" />
+            <element signature="e#41582#41773#0" expanded="true" />
+            <element signature="e#41772#41773#0" expanded="true" />
           </folding>
         </state>
       </provider>

@@ -4,10 +4,7 @@ import cn.edu.hust.conf.ConfigurationManager;
 import cn.edu.hust.constant.Constants;
 import cn.edu.hust.dao.TaskDao;
 import cn.edu.hust.dao.factory.DaoFactory;
-import cn.edu.hust.domain.SessionAggrStat;
-import cn.edu.hust.domain.SessionDetail;
-import cn.edu.hust.domain.SessionRandomExtract;
-import cn.edu.hust.domain.Task;
+import cn.edu.hust.domain.*;
 import cn.edu.hust.mockData.MockData;
 import cn.edu.hust.util.*;
 import com.alibaba.fastjson.JSONObject;
@@ -102,7 +99,7 @@ public class UserVisitAnalyze {
         calculateAndPersist(sessionAggrStatAccumulator.value(),taskId);
 
         //
-        getTop10Category(filteredSessionRDD,sessionInfoPairRDD);
+        getTop10Category(taskId,filteredSessionRDD,sessionInfoPairRDD);
         //关闭spark上下文
         context.close();
     }
@@ -594,17 +591,20 @@ public class UserVisitAnalyze {
                 visit_Length_7s_9s_ratio,visit_Length_10s_30s_ratio,visit_Length_30s_60s_ratio,
                 visit_Length_1m_3m_ratio,visit_Length_3m_10m_ratio,visit_Length_10m_30m_ratio,visit_Length_30m_ratio
         ,step_Length_1_3_ratio,step_Length_4_6_ratio,step_Length_7_9_ratio,step_Length_7_9_ratio,step_Length_30_60_ratio,step_Length_60_ratio);
+        List<SessionAggrStat> sessionAggrStatList=new ArrayList<SessionAggrStat>();
+        sessionAggrStatList.add(sessionAggrStat);
         // 插入数据库
-        DaoFactory.getSessionAggrStatDao().insert(sessionAggrStat);
+        DaoFactory.getSessionAggrStatDao().batchInsert(sessionAggrStatList);
     }
 
 
     /**
      * 获取top热门品类
+     * @param taskId
      * @param filteredSessionRDD
      * @param sessionInfoPairRDD
      */
-    private static void getTop10Category(JavaPairRDD<String, String> filteredSessionRDD, JavaPairRDD<String, Row> sessionInfoPairRDD) {
+    private static void getTop10Category(Long taskId,JavaPairRDD<String, String> filteredSessionRDD, JavaPairRDD<String, Row> sessionInfoPairRDD) {
         //1.获取符合条件的session梵文的所有品类
         JavaPairRDD<String,Row> sessionId2DetailRDD=filteredSessionRDD.join(sessionInfoPairRDD).mapToPair(new PairFunction<Tuple2<String, Tuple2<String, Row>>, String, Row>() {
             @Override
@@ -626,21 +626,27 @@ public class UserVisitAnalyze {
                 if(clickCategoryId!=null)
                     visitCategoryList.add(new Tuple2<Long, Long>(clickCategoryId,clickCategoryId));
 
-                String[] orderCategoryIdsSplited=row.getString(8).split(",");
-                for (String orderCategoryId:
-                     orderCategoryIdsSplited) {
-                    visitCategoryList.add(new Tuple2<Long, Long>(Long.valueOf(orderCategoryId),Long.valueOf(orderCategoryId)));
+                if(row.get(8)!=null){
+                    String[] orderCategoryIdsSplited=row.getString(8).split(",");
+                    for (String orderCategoryId:
+                            orderCategoryIdsSplited) {
+                        visitCategoryList.add(new Tuple2<Long, Long>(Long.valueOf(orderCategoryId),Long.valueOf(orderCategoryId)));
+                    }
                 }
 
-                String[] payCategoryIdsSplited=row.getString(10).split(",");
-                for (String payCategoryId:
-                        payCategoryIdsSplited) {
-                    visitCategoryList.add(new Tuple2<Long, Long>(Long.valueOf(payCategoryId),Long.valueOf(payCategoryId)));
+                if(row.get(10)!=null){
+                    String[] payCategoryIdsSplited=row.getString(10).split(",");
+                    for (String payCategoryId:
+                            payCategoryIdsSplited) {
+                        visitCategoryList.add(new Tuple2<Long, Long>(Long.valueOf(payCategoryId),Long.valueOf(payCategoryId)));
+                    }
                 }
                 return visitCategoryList;
             }
         });
 
+        //需要去重
+         categoryRDD=categoryRDD.distinct();
         //3。计算各个品类的点击，下单和支付次数
         // 3.1 计算点击品类的数量
         JavaPairRDD<Long,Long> clickCategoryRDD = getLClickCategoryRDD(sessionId2DetailRDD);
@@ -655,8 +661,36 @@ public class UserVisitAnalyze {
         JavaPairRDD<Long,String> categoryCountRDD=joinCategoryAndData(categoryRDD,clickCategoryRDD,orderCategoryRDD,payCategoryRDD);
 
         //5.自定义二次排序的key
+        JavaPairRDD<CategorySortKey,String> sortKeyCountRDD=categoryCountRDD.mapToPair(new PairFunction<Tuple2<Long, String>, CategorySortKey, String>() {
+            @Override
+            public Tuple2<CategorySortKey, String> call(Tuple2<Long, String> longStringTuple2) throws Exception {
+                String countInfo=longStringTuple2._2;
+                Long clickCount=Long.valueOf(StringUtils.getFieldFromConcatString(countInfo,"\\|",Constants.FIELD_CLICK_CATEGORY));
+                Long orderCount=Long.valueOf(StringUtils.getFieldFromConcatString(countInfo,"\\|",Constants.FIELD_ORDER_CATEGORY));
+                Long payCount=Long.valueOf(StringUtils.getFieldFromConcatString(countInfo,"\\|",Constants.FIELD_ORDER_CATEGORY));
+                CategorySortKey key=new CategorySortKey();
+                key.set(clickCount,orderCount,payCount);
+                return new Tuple2<CategorySortKey, String>(key,countInfo);
+            }
+        });
 
-
+        JavaPairRDD<CategorySortKey,String> sortedCategoryRDD=sortKeyCountRDD.sortByKey(false);
+        //取出前10个，写入数据库
+        List<Tuple2<CategorySortKey,String>> top10CategoryList=sortedCategoryRDD.take(10);
+        List<Top10Category> top10Categories=new ArrayList<Top10Category>();
+        for(Tuple2<CategorySortKey,String> tuple2:top10CategoryList)
+        {
+            String countInfo=tuple2._2;
+            Long categoryId=Long.valueOf(StringUtils.getFieldFromConcatString(countInfo,"\\|",Constants.FIELD_CATEGORY_ID));
+            Long clickCount=Long.valueOf(StringUtils.getFieldFromConcatString(countInfo,"\\|",Constants.FIELD_CLICK_CATEGORY));
+            Long orderCount=Long.valueOf(StringUtils.getFieldFromConcatString(countInfo,"\\|",Constants.FIELD_ORDER_CATEGORY));
+            Long payCount=Long.valueOf(StringUtils.getFieldFromConcatString(countInfo,"\\|",Constants.FIELD_ORDER_CATEGORY));
+            Top10Category top10Category=new Top10Category();
+            top10Category.set(taskId,categoryId,clickCount,orderCount,payCount);
+            top10Categories.add(top10Category);
+        }
+        //插入数据库
+        DaoFactory.getTop10CategoryDao().batchInsert(top10Categories);
     }
 
     /**
@@ -681,7 +715,7 @@ public class UserVisitAnalyze {
                     clickCount=clickIOptional.get();
                 }
 
-                String value=Constants.FIELD_CATEGORY_ID+"="+categoryId+"|"+Constants.FIELD_CLICK_CATEGORYIDS+"="+clickCount;
+                String value=Constants.FIELD_CATEGORY_ID+"="+categoryId+"|"+Constants.FIELD_CLICK_CATEGORY+"="+clickCount;
                 return new Tuple2<Long, String>(categoryId,value);
             }
         });
@@ -799,8 +833,7 @@ public class UserVisitAnalyze {
             @Override
             public Boolean call(Tuple2<String, Row> stringRowTuple2) throws Exception {
                 Row row=stringRowTuple2._2;
-                Long categoryId=row.getLong(6);
-                if(categoryId==null) return  false;
+                if(row.get(6)==null) return false;
                 return true;
             }
         });
