@@ -325,7 +325,30 @@ task_param：最最重要，用来使用JSON的格式，来封装用户提交的
     
 
 完成了数据调研、需求分析、技术方案设计、数据设计以后，正式进入编码实现和功能测试阶段。最后才是性能调优阶段。 
-
+## 编码以及实现思路
+### 数据筛选与聚合
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;通过执行任务的参数时间(筛选范围的开始时间和结束时间)筛选出符合要求的数据。
+聚合实现的思路是:根据时间筛选后的actionClick的数据，映射成为Pair<SessionId,Row>的形式，Row表示每一次点击行为。
+然后根据SessionId进行分组，对于分组后的数据根据SessionId粒度进行聚合，封装有价值的数据(搜索词，点击品类等)
+在SessionId粒度聚合后，查询出所有的用户，将用户映射成为Pair<Long,Row>，对于上诉两个RDD进行Join，将点击信息和用户信息封装成String的数据格式，
+按照SessionId为Key，需求信息为Value返回。
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;在进行聚合后，根据执行任务的相关参数进行进一步的筛选操作，比如在根据用户性别，职业，城市，
+搜索词，点击的品类id进行筛选。
+### 统计各个范围内的Session和步长占比
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;实现自定义Accumulator,在自定义Accumulator中实现各个范围内的操作，这里是一个统一的操作。
+在上面的根据需求进行筛选的时候，我们可以利用上述的过程进行代码重构，计算每一个Session的访问时长，在判断完符合条件后，可以利用自定义的Accumulator
+进行各个范围的SessionId，还有就是各个范围的步长；通过得到每个范围的数量后，计算出来占比，然后插入到数据库。
+### 随机抽取100个session
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;利用上面Session粒度的聚合代码，进行代码重构，计算出每一个Session的开始时间和结束时间。
+将过滤后的RDD映射成为Pair形式，Key为Date_Hour,Value为需求信息，然后将这个Pair按照日期和时间划分，也就是
+Map<String,Map<String,Long>> dateHourCount,日期作为Key，时间和数量作为Map，计算总的Session个数，然后每一天平摊100个，在根据每天的数量
+计算每一个小时的个数，然后调用一个随机的函数，获得随机索引，然后再遍历过滤需求，如果找到随机索引对应的信息，那么将信息保存在一个List里面批量插入；
+之后，将得到的SessionId按照join过滤后的数据，然后分区进行批量插入(这也是性能优化之一)。
+### 获取热门品类Top10
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;想将按照需求过滤后的数据和按照时间过滤后的数据进行Join操作，得到完整的数据，也就是每一次点击的
+行为还有用户的特征，然后获取点击、下单和支付的品类Id，注意这里需要去重，然后分别计算点击、下单和支付品类的各个Id和次数，将上一次得到的品类id和这三步
+相LeftOuterJoin最后的得到一个RDD，这个RDD进行map后放入我们自定义的二次排序类，然后将数据后批量插入到数据库。
+### 获取
 
 ## 用户访问Session的比较高端技术
 ### 自定义Accumulator

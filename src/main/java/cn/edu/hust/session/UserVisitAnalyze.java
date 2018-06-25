@@ -68,6 +68,8 @@ public class UserVisitAnalyze {
         //在进行accumulator之前，需要aciton动作，不然会为空
         JavaPairRDD<String,String> filteredSessionRDD=filterSessionAndAggrStat(sesssionAggregateInfoRDD,jsonObject,sessionAggrStatAccumulator);
 
+        //获取符合过滤条件的全信息公共RDD
+        JavaPairRDD<String, Row> commonFullClickInfoRDD=getFilterFullInfoRDD(filteredSessionRDD,sessionInfoPairRDD);
         //session聚合统计，统计出访问时长和访问步长的各个区间所占的比例
         /**
          * 重构实现的思路：
@@ -97,12 +99,14 @@ public class UserVisitAnalyze {
         //filteredSessionRDD.count();
         //计算各个session占比,并写入MySQL
         calculateAndPersist(sessionAggrStatAccumulator.value(),taskId);
-
-        //
-        getTop10Category(taskId,filteredSessionRDD,sessionInfoPairRDD);
+        //获取热门品类数据Top10
+        List<Tuple2<CategorySortKey,String>> top10CategoryIds=getTop10Category(taskId,commonFullClickInfoRDD);
+        //获取热门每一个品类点击Top10session
+        getTop10Session(context,taskId,commonFullClickInfoRDD,top10CategoryIds);
         //关闭spark上下文
         context.close();
     }
+
 
 
 
@@ -382,6 +386,23 @@ public class UserVisitAnalyze {
     }
 
     /**
+     *
+     * 获取过滤后的全信息RDD
+     * @param filteredSessionRDD
+     * @param sessionInfoPairRDD
+     * @return
+     */
+    private static JavaPairRDD<String, Row> getFilterFullInfoRDD(JavaPairRDD<String, String> filteredSessionRDD, JavaPairRDD<String, Row> sessionInfoPairRDD) {
+        //1.获取符合条件的session范围的所有品类
+        return filteredSessionRDD.join(sessionInfoPairRDD).mapToPair(new PairFunction<Tuple2<String, Tuple2<String, Row>>, String, Row>() {
+            @Override
+            public Tuple2<String, Row> call(Tuple2<String, Tuple2<String, Row>> stringTuple2Tuple2) throws Exception {
+
+                return new Tuple2<String, Row>(stringTuple2Tuple2._1,stringTuple2Tuple2._2._2);
+            }
+        });
+    }
+    /**
      * 随机抽取Sesison功能
      * @param taskId
      * @param filteredSessionRDD
@@ -599,22 +620,12 @@ public class UserVisitAnalyze {
 
 
     /**
-     * 获取top热门品类
+     * 获取top10热门品类
      * @param taskId
-     * @param filteredSessionRDD
-     * @param sessionInfoPairRDD
+     * @param sessionId2DetailRDD
      */
-    private static void getTop10Category(Long taskId,JavaPairRDD<String, String> filteredSessionRDD, JavaPairRDD<String, Row> sessionInfoPairRDD) {
-        //1.获取符合条件的session梵文的所有品类
-        JavaPairRDD<String,Row> sessionId2DetailRDD=filteredSessionRDD.join(sessionInfoPairRDD).mapToPair(new PairFunction<Tuple2<String, Tuple2<String, Row>>, String, Row>() {
-            @Override
-            public Tuple2<String, Row> call(Tuple2<String, Tuple2<String, Row>> stringTuple2Tuple2) throws Exception {
-
-                return new Tuple2<String, Row>(stringTuple2Tuple2._1,stringTuple2Tuple2._2._2);
-            }
-        });
-
-
+    private static List<Tuple2<CategorySortKey,String>> getTop10Category(Long taskId, JavaPairRDD<String, Row> sessionId2DetailRDD) {
+        //1.第一步已抽离出方法getFilterFullInfoRDD
         //2。获取访问的品类id，访问过表示点击，下单，支付
         JavaPairRDD<Long,Long> categoryRDD=sessionId2DetailRDD.flatMapToPair(new PairFlatMapFunction<Tuple2<String,Row>, Long, Long>() {
             @Override
@@ -691,7 +702,10 @@ public class UserVisitAnalyze {
         }
         //插入数据库
         DaoFactory.getTop10CategoryDao().batchInsert(top10Categories);
+        return top10CategoryList;
     }
+
+
 
     /**
      * 将几个品类相连接
@@ -756,6 +770,7 @@ public class UserVisitAnalyze {
         return tmpRDD;
     }
 
+    //后去支付品类RDD
     private static JavaPairRDD<Long,Long> getPayCategoryRDD(JavaPairRDD<String, Row> sessionId2DetailRDD) {
         JavaPairRDD<String,Row> payActionRDD=sessionId2DetailRDD.filter(new Function<Tuple2<String, Row>, Boolean>() {
             @Override
@@ -792,6 +807,7 @@ public class UserVisitAnalyze {
         return payCategoryCountRDD;
     }
 
+    //获取下单品类RDD
     private static JavaPairRDD<Long,Long> getOrderCategoryRDD(JavaPairRDD<String, Row> sessionId2DetailRDD) {
         JavaPairRDD<String,Row> orderActionRDD=sessionId2DetailRDD.filter(new Function<Tuple2<String, Row>, Boolean>() {
             @Override
@@ -828,6 +844,7 @@ public class UserVisitAnalyze {
         return orderCategoryCountRDD;
     }
 
+    //获取点击品类RDD
     private static JavaPairRDD<Long,Long> getLClickCategoryRDD(JavaPairRDD<String, Row> sessionId2DetailRDD) {
         JavaPairRDD<String,Row> clickActionRDD=sessionId2DetailRDD.filter(new Function<Tuple2<String, Row>, Boolean>() {
             @Override
@@ -854,5 +871,71 @@ public class UserVisitAnalyze {
             }
         });
         return clickCategoryCountRDD;
+    }
+
+
+    //获取每一个品类的Session Top10
+    private static void getTop10Session(JavaSparkContext sc, Long taskId, JavaPairRDD<String, Row> commonFullClickInfoRDD, List<Tuple2<CategorySortKey, String>> top10CategoryIds) {
+        List<Tuple2<Long,Long>> categoryIdList=new ArrayList<Tuple2<Long, Long>>();
+        for(Tuple2<CategorySortKey, String> top10CategoryId:top10CategoryIds)
+        {
+            String countInfo=top10CategoryId._2;
+            Long categoryId=Long.valueOf(StringUtils.getFieldFromConcatString(countInfo,"\\|",Constants.FIELD_CATEGORY_ID));
+            categoryIdList.add(new Tuple2<Long, Long>(categoryId,categoryId));
+        }
+        //生成一份RDD
+        JavaPairRDD<Long,Long> top10CategoryIdsRDD=sc.parallelizePairs(categoryIdList);
+        //按照SessionId进行分组
+        JavaPairRDD<String,Iterable<Row>> gourpBySessionIdRDD=commonFullClickInfoRDD.groupByKey();
+        //计算每一个session对品类的点击次数
+        JavaPairRDD<Long,String> categorySessionCountRDD=gourpBySessionIdRDD.flatMapToPair(new PairFlatMapFunction<Tuple2<String, Iterable<Row>>, Long, String>() {
+            @Override
+            public Iterable<Tuple2<Long, String>> call(Tuple2<String, Iterable<Row>> tuple2) throws Exception {
+                String sessionId=tuple2._1;
+                //保存每一个品类的单击次数
+                Map<Long,Long> categoryIdCount=new HashMap<Long, Long>();
+                for(Row row:tuple2._2)
+                {
+                    if(row.get(6)!=null)
+                    {
+                        Long count=categoryIdCount.get(row.getLong(6));
+                        if(count==null)
+                        {
+                            count=0L;
+                        }
+                        count++;
+                        categoryIdCount.put(row.getLong(6),count);
+                    }
+                }
+                List<Tuple2<Long,String>>  categoryIdCountList=new ArrayList<Tuple2<Long,String>>();
+                for(Map.Entry<Long,Long> entry:categoryIdCount.entrySet())
+                {
+                    //将数据拼接
+                    String value=sessionId+","+entry.getValue();
+                    categoryIdCountList.add(new Tuple2<Long,String>(entry.getKey(),value));
+                }
+                return categoryIdCountList;
+            }
+        });
+
+        //将top10的品类与上面计算的RDD相join 得到每一个热门品类的点击次数
+        JavaPairRDD<Long,String> top10CategorySessionCountRDD=top10CategoryIdsRDD.join(categorySessionCountRDD).mapToPair(new PairFunction<Tuple2<Long, Tuple2<Long, String>>, Long, String>() {
+            @Override
+            public Tuple2<Long, String> call(Tuple2<Long, Tuple2<Long, String>> tuple2) throws Exception {
+                return new Tuple2<Long,String>(tuple2._1,tuple2._2._2);
+            }
+        });
+
+        //根据品类分组
+        JavaPairRDD<Long,Iterable<String>> top10CategorySessionCountGroupRDD=top10CategorySessionCountRDD.groupByKey();
+
+        JavaPairRDD<Long,String> top10CategorySessionRDD=top10CategorySessionCountGroupRDD.flatMapToPair(new PairFlatMapFunction<Tuple2<Long,Iterable<String>>, Long,String>() {
+            @Override
+            public Iterable<Tuple2<Long, String>> call(Tuple2<Long, Iterable<String>> tuple2) throws Exception {
+                List<Top10CategorySession> top10CategorySessionList=new ArrayList<Top10CategorySession>();
+
+                return null;
+            }
+        });
     }
 }
