@@ -497,3 +497,24 @@ Spark中，堆内存，又被划分成为两部分，一块是专门用来给RDD
 cache操作的内存占比，大不了用persist操作，选择将缓存的数据写入磁盘，配合序列化方式，减少算子缓存内存占比。
          
 一句话，让task执行算子函数有更多的内存可以是使用。可以使用参数spark.storage.memoryFraction进行调节，默认是0.6。
+
+## JVM调优之调节executor堆外内存之连接等待时长
+有时候，如果你的spark作业处理的数据量特别大的几亿数据量，然后作业一运行，时不时的保存，shuffle file cannot find，task lost ，oom。
+
+可以说你的executor的堆外内存不足够，导致executor在运行的过程中，可能会内存溢出，然后导致后续的stage的task在运行的时候，可能要从一些
+
+executor中拉去shuffle map output文件，但是executor可能会挂掉，关联的block manager也没有了，可能会报shuffle output not found 
+
+等spark作业会彻底崩溃。
+
+上述情况，可以考虑调节executor的堆外内存占比此外，有时堆外内存调节的比较的时候，对于性能的提升会有一定的提升。
+
+如何调节？
+
+在spark-submit的脚本中，去用--conf的方式，去添加配置。
+
+spark.yarn.executor.memoryOverhead参数，针对的的是yarn的提交方式。
+
+通过这个参数调节以后，可以避免以上问题的避免。
+
+对于等待时间，就是在出现上述错误的时候，连接不上拉去数据的Block Manager，就会出现这个问题，我们需要在spark-submit脚本中配置等待时长，默认是60秒。
