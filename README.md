@@ -498,7 +498,7 @@ cache操作的内存占比，大不了用persist操作，选择将缓存的数�
          
 一句话，让task执行算子函数有更多的内存可以是使用。可以使用参数spark.storage.memoryFraction进行调节，默认是0.6。
 
-## JVM调优之调节executor堆外内存之连接等待时长
+### JVM调优之调节executor堆外内存之连接等待时长
 有时候，如果你的spark作业处理的数据量特别大的几亿数据量，然后作业一运行，时不时的保存，shuffle file cannot find，task lost ，oom。
 
 可以说你的executor的堆外内存不足够，导致executor在运行的过程中，可能会内存溢出，然后导致后续的stage的task在运行的时候，可能要从一些
