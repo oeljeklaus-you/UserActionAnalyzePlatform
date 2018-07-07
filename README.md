@@ -478,3 +478,22 @@ spark.locality.wait.node
 spark.locality.wait.rack
 
 在SparkConf中设置即可
+
+### JVM调优原理之降低cache操作的内存比
+有哪些调优?
+
+1.常规性能调优，分配资源，并行度
+
+2.JVM调优，JVM相关的参数，通常情况下，如果你的硬件配置，基础的JVM的配置，通常都不会造成太严重的性能问题。主要是在线上故障中，JVM占很重要的地位。
+
+3.shuffle调优，spark在执行groupbykey,reducebykey等操作时，shuffle环节很重要，shuffle调优，其实对spark作业的性能的影响相当高，基本上shuffle的性能消耗，占用整个spark的50％及以上。
+
+4.spark操作的调优，gourpbykey,countbykey来重构，有些算子性能，是比其他算子的性能要高
+         
+Spark中，堆内存，又被划分成为两部分，一块是专门用来给RDD的cache,persist进行数据缓存用的，还有一块是用来算子运算的，存放函数中自己创建的对象。   
+
+默认情况下，给算子cache操作的内存占比，是0.6，也就是用于算子做算的只占有0.4。如果出现频道的GC，如果cache操作很充足，那么就可以调节一下占比，降低
+
+cache操作的内存占比，大不了用persist操作，选择将缓存的数据写入磁盘，配合序列化方式，减少算子缓存内存占比。
+         
+一句话，让task执行算子函数有更多的内存可以是使用。可以使用参数spark.storage.memoryFraction进行调节，默认是0.6。
