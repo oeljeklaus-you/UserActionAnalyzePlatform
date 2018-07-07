@@ -460,7 +460,7 @@ NODE_LOCAL:节点本地化，代码和数据在同一节点，但是数据在不
 
 RACK_LOCAL:在一个机架上，需要跨节点拉去数据。
 
-NY:跨机架拉去数据。
+ANY:跨机架拉去数据。
 
 spark.locality.wait默认是3s。
 
