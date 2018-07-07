@@ -518,3 +518,32 @@ spark.yarn.executor.memoryOverhead参数，针对的的是yarn的提交方式。
 通过这个参数调节以后，可以避免以上问题的避免。
 
 对于等待时间，就是在出现上述错误的时候，连接不上拉去数据的Block Manager，就会出现这个问题，我们需要在spark-submit脚本中配置等待时长，默认是60秒。
+## troubleshooting
+### troubleshooting之控制shuffle reduce端缓冲大小避免OOM
+shuffle过程中优map端的task是不断的输出数据的，数据量可能是很大的，但是，其实reduce端的task，并不是等到map端task将属于自己的那份数据全部
+
+写入磁盘文件之后，再拉去的，map端写一点数据，reduce端task就会拉去一部分数据，立即进行后面的聚合，算子函数的应用。
+
+每次reduce能够拉去多少数据，就是由buffer来决定的，因为拉去过来的数据，都是先放在buffer中的，然后才用后面的executor分配的堆内存占比，
+
+hashmap去进行后续的聚合，函数执行。
+
+reduce端缓冲，可能出现什么问题？
+
+默认48MB，reduce端task一边拉取一边计算，不一定一直会拉满48MB的数据，可能大多数情况下，拉取10MB就计算掉了。
+
+大多数时候，也不会出现问题，有些时候map端的数据量特别大，然后写出的数据特别快，reduce端所有的task拉去的时候全部到达自己极限值。
+
+这个时候加上你的reduce端执行的聚合函数的代码，就可能创建大量的对象，一下子，内存就出现OOM。reduce端的内存中，就出现了内存溢出。
+
+怎么解决呢？
+
+减少reduce端task缓冲大小，这样就不容易出现OOM问题了。
+
+spark作业，首先，第一要义，就是一定要让它跑起来，然后再考虑性能。
+
+关于reduce端缓冲大小的另外一面，关于性能调优:
+
+如果资源特别充分，可以尝试增加reduce端缓冲大小，这样就可以减少拉取次数，减少网络传输。
+
+配置的参数，spark.reducer.maxSizeInflight
