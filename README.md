@@ -547,3 +547,15 @@ spark作业，首先，第一要义，就是一定要让它跑起来，然后再
 如果资源特别充分，可以尝试增加reduce端缓冲大小，这样就可以减少拉取次数，减少网络传输。
 
 配置的参数，spark.reducer.maxSizeInflight
+### troubleshooting之shuffle文件拉取失败
+有时候会出现一种情况，非常普遍;shuffle file cannot find，在spark的作业中，这是非常普遍，而且有时候，他会偶尔出现，但是重现提交task后，
+
+这种现象又不会出现，可以考虑是某一个executor在执行GC，但是下一个stage的executor需要拉去该task中的数据，这就导致了还现象的发生。
+
+spark.shuffle.io.maxRetries 3
+这个参数表示shuffle文件拉取的时候，如果没有拉取到，最多或者重试几次，默认是3次。
+
+spark.shuffle.io.retryWait 5s
+这个参数的意思是每一次拉取文件的时间间隔，默认是5s。
+
+针对以上情况，我们可以可以增大这两个参数的值，达到比较大的一个值，尽量保证第二个stage的task，一定能够拉取到上一个stage的输出文件。避免出现上述错误。
