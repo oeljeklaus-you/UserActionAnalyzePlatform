@@ -668,7 +668,7 @@ reduce端聚合内存，占比。默认是0.2。如果数据量比较大，reduc
 
 在实际生产环境中，我们在什么时候来调节两个参数？
 
-看Spark UI，如果你的公司是决定采用standalone模式，那么狠简单，你的spark跑起来，会显示一个Spark UI的地址，4040的端口，进去看，依次点击进去，
+看Spark UI，如果你的公司是决定采用standalone模式，那么狠简单，你的spark跑起来，会显示一个Spark UI的地址，8080的端口，进去看，依次点击进去，
 
 可以看到，你的每个stage的详情，有哪些executor，有哪些task，每个task的shuffle write和shuffle read的量，shuffle的磁盘和内存，读写的数据量；
 
