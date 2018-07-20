@@ -616,6 +616,7 @@ shuffle没调优，shuffle就很糟糕了；大量的map端输出文件的产生
 这个时候，去开启这个机制，可以很有效的提升性能。
 ### Shuffle调优之调节map端内存缓冲与reduce端占比
 **未调优之前**
+
 spark.shuffle.file.buffer，默认32k
 
 spark.shuffle.memoryFraction，0.2
@@ -629,6 +630,7 @@ map端内存缓冲，reduce端内存占比；很多资料、网上视频，都�
 最终很多个性能调优的小点的效果，汇集在一起之后，那么就会有可以看见的还算不错的性能调优的效果
 ![map端内存缓冲与reduce端](map端内存缓冲与reduce端占比.png)
 **原理描述**
+
 reduce端task，在拉取到数据之后，会用hashmap的数据格式，来对各个key对应的values进行汇聚。
 
 针对每个key对应的values，执行我们自定义的聚合函数的代码，比如_ + _（把所有values累加起来）
@@ -659,6 +661,7 @@ reduce端聚合内存，占比。默认是0.2。如果数据量比较大，reduc
 这两个点之所以放在一起讲，是因为他们俩是有关联的。数据量变大，map端肯定会出点问题；reduce端肯定也会出点问题；出的问题是一样的，都是磁盘IO频繁，变多，影响性能。
 
 **优化思路**
+
 调节map task内存缓冲：spark.shuffle.file.buffer，默认32k（spark 1.3.x不是这个参数，后面还有一个后缀，kb；spark 1.5.x以后，
 
 变了，就是现在这个参数）调节reduce端聚合内存占比：spark.shuffle.memoryFraction，0.2
