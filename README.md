@@ -546,6 +546,7 @@ reduceByKey(_+_)，在某个action触发job的时候，DAGScheduler，会负责�
 3.shuffle前半部分的task在写入数据到磁盘文件之前，都会先写入一个一个的内存缓冲，内存缓冲满溢之后，再spill溢写到磁盘文件中。
 ### Shuffle调优之合并map端输出文件
 **如果不合并map端输出文件会怎么样?**
+
 前置条件：每个executor有2个cpu core。4个task。task是线程执行的。所以先并行跑2个task，再跑剩下2个task。
 ![合并map端输出文件](合并map端输出文件.png)
 问题来了：默认的这种shuffle行为，对性能有什么样的恶劣影响呢？
@@ -565,11 +566,13 @@ shuffle中的写磁盘的操作，基本上就是shuffle中性能消耗最为严
 磁盘IO对性能和spark作业执行速度的影响，是极其惊人和吓人的。
 
 基本上，spark作业的性能，都消耗在shuffle中了，虽然不只是shuffle的map端输出文件这一个部分，但是这里也是非常大的一个性能消耗点。
+
 **开启map端输出文件合并**
+
 new SparkConf().set("spark.shuffle.consolidateFiles", "true")
 
 开启shuffle map端输出文件合并的机制；默认情况下，是不开启的，就是会发生如上所述的大量map端输出文件的操作，严重影响性能。
-![map端文件合并](map端文件合并.png)
+![map端文件合并](map端合并文件.png)
 开启了map端输出文件的合并机制之后：
 
 第一个stage，同时就运行cpu core个task，比如cpu core是2个，并行运行2个task；每个task都创建下一个stage的task数量个文件；
@@ -598,11 +601,17 @@ map端输出文件，在生产环境中，立减5倍！
 合并map端输出文件，对咱们的spark的性能有哪些方面的影响呢？
 
 1、map task写入磁盘文件的IO，减少：100万文件 -> 20万文件
-2、第二个stage，原本要拉取第一个stage的task数量份文件，1000个task，第二个stage的每个task，都要拉取1000份文件，走网络传输；合并以后，100个节点，每个节点2个cpu core，第二个stage的每个task，主要拉取100 * 2 = 200个文件即可；网络传输的性能消耗是不是也大大减少
 
-分享一下，实际在生产环境中，使用了spark.shuffle.consolidateFiles机制以后，实际的性能调优的效果：对于上述的这种生产环境的配置，性能的提升，还是相当的客观的。spark作业，5个小时 -> 2~3个小时。
+2、第二个stage，原本要拉取第一个stage的task数量份文件，1000个task，第二个stage的每个task，都要拉取1000份文件，走网络传输；
 
-大家不要小看这个map端输出文件合并机制。实际上，在数据量比较大，你自己本身做了前面的性能调优，executor上去->cpu core上去->并行度（task数量）上去，shuffle没调优，shuffle就很糟糕了；大量的map端输出文件的产生。对性能有比较恶劣的影响。
+合并以后，100个节点，每个节点2个cpu core，第二个stage的每个task，主要拉取100 * 2 = 200个文件即可；网络传输的性能消耗是不是也大大减少
+
+分享一下，实际在生产环境中，使用了spark.shuffle.consolidateFiles机制以后，实际的性能调优的效果：对于上述的这种生产环境的配置，
+
+性能的提升，还是相当的客观的。spark作业，5个小时 -> 2~3个小时。
+
+大家不要小看这个map端输出文件合并机制。实际上，在数据量比较大，你自己本身做了前面的性能调优，executor上去->cpu core上去->并行度（task数量）上去，
+shuffle没调优，shuffle就很糟糕了；大量的map端输出文件的产生。对性能有比较恶劣的影响。
 
 这个时候，去开启这个机制，可以很有效的提升性能。
 ## troubleshooting
