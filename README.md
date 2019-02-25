@@ -789,3 +789,7 @@ spark作业的数据来源，通常是从hive表。对于spark作业的输入源
 在调用的时候，传入进入一个参数，这个数字表示reduce端的并行度。
 
 这个方案只是缓解了数据倾斜的问题。
+##  微信公总号
+更多知识，请关注微信公众号:*程序猿技术*
+
+![程序猿技术](https://github.com/oeljeklaus-you/UserActionAnalyzePlatform/blob/master/2019_02_22_1933083452.png)
